@@ -7,7 +7,7 @@ Welcome to the official tutorial for KieranWizard! This guide will walk you thro
 > **Stop.** Read this entire section before texting/calling me. If you call me and I can tell it's your first time reading these instructions, I will come find you.
 
 1. **Why do I need Real-Debrid?**
-   Real-Debrid is a multi-hoster caching service. It caches data on its high-speed servers and provides direct access — meaning you access content from their secure servers rather than via public peer networks. It also acts as an encrypted layer so your connection is protected. TLDR: All the benefits of a premium media library, but safe and protected.
+   Real-Debrid is a multi-hoster caching service. It caches data on its high-speed servers and provides direct access — meaning you access content from their secure servers rather than via public peer networks. It also acts as an encrypted layer so your connection is protected. TLDR: You can stream content without getting caught. 
 
 2. **Each person MUST have their own Real-Debrid account.**
    > ⚠️ **DO NOT share a Real-Debrid account with anyone, even within the same household or city.** Real-Debrid actively monitors for account sharing. If two people use the same account from different IPs (even in the same city), your account **WILL be permanently banned** with no refund. I learned this the hard way. Buy your own subscription — it's like $4/month. This is non-negotiable.
@@ -61,7 +61,7 @@ Before you begin, ensure you have the following accounts and software ready. The
     *   *Create a free account and remember your credentials. You'll type them into addon settings.*
 
 4.  **OMDB API**
-    *   *Why?* For movie and TV show information and ratings from multiple sources.
+    *   *Why?* For movie and TV show information and ratings from sources such as IMDb, Rotten Tomatoes and displays awards received.
     *   *Sign up:* [https://www.omdbapi.com](https://www.omdbapi.com/apikey.aspx?__EVENTTARGET=freeAcct&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFgICBw8WAh4HVmlzaWJsZWhkAgIPFgIfAGhkAgMPFgIfAGhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBQtwYXRyZW9uQWNjdAUIZnJlZUFjY3QFCGZyZWVBY2N0MXBaUo2PpHbEmO0KsvHCBMiAqbwPSispxmMnBH5rXb8%3D&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAV6O6wfBwA%2F81aWW2BYfVtumSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYpioiDjxFjSdCQfbG0SWduXFd8BcWGH1ot0k0SO7CfuulGztfcyzE1Lkxwo9dYYBItHiFDZeQhYzawd9QWEG%2BI9i&at=freeAcct&Email=)
     *   *Request a free API key. Set the use as "personal media hub."*
 
@@ -76,7 +76,7 @@ Before you begin, ensure you have the following accounts and software ready. The
 
 Real-Debrid is essential for high-speed streaming. Set up your account **before** installing the build so you're ready to authorize when prompted.
 
-> ⚠️ **REMINDER: Each person needs their OWN Real-Debrid account. Sharing an account (even within the same city) WILL get your account permanently banned.**
+> ⚠️ **REMINDER: Each person needs their OWN Real-Debrid account. Sharing an account (even within the same city) WILL get your account permanently banned. Each account provides one stream at a time.**
 
 1. **Sign up for Real-Debrid**
     *   Go to [https://real-debrid.com](https://real-debrid.com/?id=9373068)
@@ -111,11 +111,11 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 1.  From the Kodi home screen, click the **gear icon** ⚙️ (top-left) to open **Settings**.
 2.  Click **System**.
 3.  On the left sidebar, click **Add-ons**.
-4.  Toggle **"Unknown sources"** to **ON**.
-5.  A warning popup will appear — click **Yes** to confirm.
-6.  Press **Esc** or **Back** to return to the home screen.
+4.  > ⚠️ **Important:** If you don't see the "Add-ons" option in System settings, you may need to change the settings level. In the bottom-left corner of the Settings page, click the gear icon until it says **"Advanced"** or **"Expert"**.
+5.  Toggle **"Unknown sources"** to **ON**.
+6.  A warning popup will appear — click **Yes** to confirm.
+7.  Press **Esc** or **Back** to return to the home screen.
 
-> ⚠️ **Important:** If you don't see the "Add-ons" option in System settings, you may need to change the settings level. In the bottom-left corner of the Settings page, click the gear icon until it says **"Advanced"** or **"Expert"**.
 
 ### Step 3: Install the Wizard from Zip File
 
