@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.venv/
+.env
+.vscode/
+.idea/
+*.zip
+*.rar
+*.7z
+# Keep builds.txt and packs if user specifically wants to commit them, 
+# but usually it's better to keep large assets in a separate repo.
