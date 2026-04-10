@@ -353,6 +353,24 @@ if CONFIG.get_setting('post_install_setup') == 'true':
     from resources.libs import accounts
     accounts.Accounts().post_install_loop()
 
+# RE-APPLY SETUP COMPLETE SKIN BOOL
+# Skin.SetBool is session-only and is lost when Kodi restarts.
+# If the user has already finished setup (persisted in addon settings),
+# re-apply all the relevant skin bools so the Setup screen stays hidden.
+if CONFIG.get_setting('setup_complete') == 'true':
+    logging.log("[Checklist] Re-applying SetupComplete skin bools after restart", level=xbmc.LOGINFO)
+    from resources.libs.accounts import (
+        SKIN_BOOL_RD, SKIN_BOOL_TRAKT_FENLIGHT,
+        SKIN_BOOL_TRAKT_TMDB, SKIN_BOOL_SETUP_COMPLETE,
+    )
+    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_SETUP_COMPLETE))
+    # Also restore the individual auth bools so checkmarks remain visible
+    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_RD))
+    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
+    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_TMDB))
+else:
+    logging.log("[Checklist] Setup not yet complete, skipping skin bool restore", level=xbmc.LOGINFO)
+
 # BUILD INSTALL PROMPT
 if tools.open_url(CONFIG.BUILDFILE, check=True) and CONFIG.get_setting('installed') == 'false':
     logging.log("[Current Build Check] Build Not Installed", level=xbmc.LOGINFO)

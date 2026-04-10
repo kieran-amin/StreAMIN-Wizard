@@ -166,6 +166,11 @@ class Accounts:
         """
         Mark setup as complete. Sets Skin.Bool(SetupComplete) which the skin
         uses to hide the Setup page from the homescreen.
+
+        IMPORTANT: Skin.SetBool is session-only and does not survive a Kodi
+        restart. We therefore also persist the flag to the wizard's addon
+        settings (setup_complete = 'true') so that startup.py can re-apply
+        the skin bool on every subsequent boot.
         """
         # Check if all items have been marked as authorized
         all_done = (
@@ -184,8 +189,14 @@ class Accounts:
             if not proceed:
                 return
 
+        # Set the skin bool for this session
         xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_SETUP_COMPLETE))
-        logging.log("[Checklist] Setup marked as complete", level=xbmc.LOGINFO)
+
+        # Persist to addon settings so the bool is re-applied after every restart
+        CONFIG.set_setting('setup_complete', 'true')
+
+        logging.log("[Checklist] Setup marked as complete (persisted to addon settings)",
+                    level=xbmc.LOGINFO)
 
         self.dialog.ok(
             CONFIG.ADDONTITLE,
@@ -204,6 +215,8 @@ class Accounts:
         """
         Reset the checklist: clears all Skin.Bools so the Setup page
         reappears and all items show as incomplete.
+        Also clears the persistent addon setting so startup.py no longer
+        re-applies SetupComplete on boot.
         Useful for re-running setup or after a layout pack update.
         """
         xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_RD))
@@ -211,7 +224,10 @@ class Accounts:
         xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_TRAKT_TMDB))
         xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_SETUP_COMPLETE))
 
-        logging.log("[Checklist] All skin bools reset", level=xbmc.LOGINFO)
+        # Also clear the persistent flag so the skin bool isn't re-applied on next boot
+        CONFIG.set_setting('setup_complete', 'false')
+
+        logging.log("[Checklist] All skin bools reset (addon setting cleared)", level=xbmc.LOGINFO)
         logging.log_notify(
             CONFIG.ADDONTITLE,
             "[COLOR limegreen]Setup Checklist Reset[/COLOR]")

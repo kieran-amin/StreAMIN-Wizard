@@ -27,10 +27,11 @@ Welcome to the official tutorial for KieranWizard! This guide will walk you thro
 - [Installation](#installation)
   - [Step 1: Install Kodi](#step-1-install-kodi)
   - [Step 2: Enable Unknown Sources](#step-2-enable-unknown-sources)
-  - [Step 3: Install the Wizard from Zip File](#step-3-install-the-wizard-from-zip-file)
-  - [Step 4: Install the Base Pack](#step-4-install-the-base-pack)
-  - [Step 5: Install the Layout Pack](#step-5-install-the-layout-pack)
-  - [Step 6: Authorize Your Accounts](#step-6-authorize-your-accounts)
+  - [Step 3: Download the Wizard](#step-3-download-the-wizard)
+  - [Step 4: Install the Wizard from Zip File](#step-4-install-the-wizard-from-zip-file)
+  - [Step 5: Install the Base Pack](#step-5-install-the-base-pack)
+  - [Step 6: Install the Layout Pack](#step-6-install-the-layout-pack)
+  - [Step 7: Authorize Your Accounts](#step-7-authorize-your-accounts)
 - [Setting up Addons](#setting-up-addons)
 - [How to Use](#how-to-use)
 - [Anime Configuration](#anime-configuration)
@@ -117,72 +118,76 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 7.  Press **Esc** or **Back** to return to the home screen.
 
 
-### Step 3: Install the Wizard from Zip File
+### Step 3: Download the Wizard
 
-You need the `plugin.program.kieranwizard-1.0.0.zip` file. This will be provided to you directly.
+1.  Go to the KieranWizard GitHub page: [https://github.com/kieran-amin/plugin.program.kieranwizard](https://github.com/kieran-amin/plugin.program.kieranwizard)
+2.  Click the green **`<> Code`** button near the top-right of the page.
+3.  Select **"Download ZIP"** from the dropdown.
+4.  Your browser will download a file called **`plugin.program.kieranwizard-main.zip`**.
+5.  **Do not unzip it.** Kodi installs directly from the `.zip` file.
+6.  Move or note where the file saved — by default it goes to your **Downloads** folder.
 
-#### Option A: Install from a USB drive or local file
+> 💡 **Tip:** Rename the file to something shorter like `kieranwizard.zip` if you like — it doesn't matter what it's called.
 
-1.  Copy the zip file to a location you can find easily (e.g., your Downloads folder, Desktop, or a USB drive).
-2.  From the Kodi home screen, click **Add-ons** in the left sidebar.
-3.  Click the **open box icon** 📦 (top-left corner) — this is the "Add-on browser".
-4.  Select **"Install from zip file"**.
-5.  If you get a popup about Unknown Sources, click **Settings** and enable it (see Step 2).
-6.  Navigate to where you saved the zip file:
-    *   **Windows:** Look under your username → `Downloads` or `Desktop`.
-    *   **Android/Firestick:** Look under `Internal Storage` or `sdcard` → `Download`.
-    *   **USB Drive:** It will appear as a separate drive/storage option.
-7.  Click on **`plugin.program.kieranwizard-1.0.0.zip`**.
-8.  Wait for the notification **"KieranWizard Add-on installed"** to appear in the top-right corner of the screen.
+---
 
-#### Option B: Install from a URL source (advanced)
+### Step 4: Install the Wizard from Zip File
 
-1.  From the Kodi home screen, click the **gear icon** ⚙️ → **File Manager**.
-2.  Double-click **"Add source"** on either side.
-3.  Click **`<None>`** and type in the URL provided to you (e.g., `http://yourhost.com/repo/`).
-4.  In the **"Enter a name for this media source"** field, type a name like `KieranWizard`.
-5.  Click **OK**.
-6.  Go back to the Home screen → **Add-ons** → click the **open box icon** 📦.
-7.  Select **"Install from zip file"**.
-8.  Click on the source name you just created (`KieranWizard`).
-9.  Select the `plugin.program.kieranwizard-1.0.0.zip` file.
-10. Wait for the **"KieranWizard Add-on installed"** notification.
+1.  From the Kodi home screen, click **Add-ons** in the left sidebar.
+2.  Click the **open box icon** 📦 in the top-left corner — this opens the Add-on browser.
+3.  Select **"Install from zip file"**.
+4.  If a popup about Unknown Sources appears, click **Settings** and enable it (see Step 2), then come back.
+5.  A file browser will open. Navigate to your **Downloads** folder:
 
-### Step 4: Install the Base Pack
+#### 🖥️ Windows
+- In the file browser, scroll up and look for **`Home folder`** (or your username, e.g. `C:\Users\YourName`).
+- Open it, then open the **`Downloads`** folder.
+- Find and click **`plugin.program.kieranwizard-main.zip`**.
+
+> ⚠️ **Can't find your Downloads folder?** Kodi's file browser starts in its own folder. Keep scrolling up past `Root filesystem` until you see your user folders, or look under **`Windows`** → **`C:`** → **`Users`** → **`(your username)`** → **`Downloads`**.
+
+#### 📱 Android / Firestick
+- Look for **`Internal Storage`** or **`sdcard`** in the file browser.
+- Open it and navigate to the **`Download`** folder.
+- Find and click the zip file.
+
+#### 💾 USB Drive
+- Plug in your USB drive before opening Kodi.
+- In the file browser, it will appear as a separate removable storage option.
+- Navigate to it and select the zip file.
+
+6.  Wait for the **"KieranWizard Add-on installed"** notification to appear in the top-right corner. This may take 10-20 seconds.
+
+### Step 5: Install the Base Pack
 
 The Base Pack installs all the core addons and settings. **You must install this first.**
 
-1.  After the wizard is installed, it will launch automatically on next Kodi startup. If it doesn't:
-    *   Go to **Add-ons** → **Program add-ons** → **KieranWizard**.
-2.  The wizard will show a build prompt. Click **"Build Menu"**.
-3.  You will see a list of available packs. Select **"Base Pack"**.
-4.  Click **"Install"**.
-5.  Confirm by clicking **"Yes, Install"**.
-6.  Wait for the download and extraction to complete (a progress bar will show).
+1.  After the wizard is installed, **restart Kodi** — close it completely and reopen it.
+2.  The wizard will launch automatically and show a build prompt. Click **"Build Menu"**.
+    *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard** manually.
+3.  Select **"Base Pack"** from the list.
+4.  Click **"Fresh Install"**.
+5.  Confirm by clicking **"Yes"**.
+6.  A progress bar will appear — wait for the download and extraction to complete. Do not interact with Kodi during this time.
 7.  When prompted, click **OK** to **force close Kodi**.
-8.  **Reopen Kodi.** Wait for it to fully load — this first boot after the Base Pack install may take 1-2 minutes as it sets up all the addons.
+8.  **Reopen Kodi** and wait for it to fully load. The first boot after the Base Pack install may take 1-2 minutes.
 
-> 💡 **Tip:** Do NOT interact with Kodi while it's loading for the first time after a Base Pack install. Let it finish completely.
+> 💡 **Tip:** Do NOT click anything while Kodi is initializing after this install. Let it finish on its own.
 
-### Step 5: Install the Layout Pack
+### Step 6: Install the Layout Pack
 
-The Layout Pack applies the skin, menu layout, and widget configuration on top of the Base Pack. **Note:** This pack is restricted to authorized users only.
+The Layout Pack applies the custom skin, menu layout, and widgets on top of the Base Pack. Install this **after** the Base Pack.
 
-**How to get authorization:**
-Contact Kieran to request an authorization passcode. You will need this passcode to install the Layout Pack.
+1.  After Kodi fully loads, the wizard will launch automatically again. Click **"Build Menu"**.
+    *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard**.
+2.  Select **"Layout Pack"** from the list.
+3.  Click **"Fresh Install"**.
+4.  Confirm by clicking **"Yes"**.
+5.  Wait for the download and extraction to complete.
+6.  When prompted, click **OK** to **force close Kodi**.
+7.  **Reopen Kodi.** The custom skin and layout should now be active.
 
-1.  After Kodi fully loads, the wizard should launch automatically again.
-2.  Click **"Build Menu"** if prompted, or go to **Add-ons** → **Program add-ons** → **KieranWizard** → **Install Layout Pack**.
-3.  Select **"Layout Pack"**.
-4.  Click **"Install"**.
-5.  **Enter your Passcode:** A keyboard will appear on screen asking for your Authorized Passcode. Type it in and press OK.
-6.  Confirm by clicking **"Yes, Install"**.
-7.  Wait for the download and extraction to complete.
-8.  A checklist will appear reminding you to authorize your Debrid and Trakt accounts.
-9.  Click **OK**, then when prompted, click **OK** again to **force close Kodi**.
-10. **Reopen Kodi.** The custom skin and layout should now be active.
-
-### Step 6: Authorize Your Accounts (Setup Checklist)
+### Step 7: Authorize Your Accounts (Setup Checklist)
 
 After Kodi restarts with the Layout Pack installed, a **Setup Checklist** widget will appear directly on your home screen. This is designed to make authorization as easy as possible.
 

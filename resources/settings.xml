@@ -24,6 +24,8 @@
         <setting id="errors" type="number" label="Extract Error" visible="false" default="0" />
         <setting id="post_install_setup" type="bool" label="Post Install Setup Needed"
             visible="false" default="false" />
+        <setting id="setup_complete" type="text" label="Setup Checklist Completed"
+            visible="false" default="false" />
         <setting id="defaultskin" type="text" label="Default Skin: " enable="false" default=""
             visible="false" />
         <setting id="defaultskinname" type="text" label="Default Skin Name: " enable="false"
