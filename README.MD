@@ -1,14 +1,14 @@
-﻿Welcome to the official tutorial for KieranWizard! This guide will walk you through everything you need to knowâ€”from installation to advanced tips and tricks.
+﻿Welcome to the official tutorial for KieranWizard! This guide will walk you through everything you need to know—from installation to advanced tips and tricks.
 
-## âš ï¸ READ THIS FIRST â€” Common Questions & Rules
+## ⚠️ READ THIS FIRST — Common Questions & Rules
 
 > **Stop.** Read this entire section before texting/calling me. If you call me and I can tell it's your first time reading these instructions, I will come find you. Charles, don't make me come to Madison. 
 
 1. **Why do I need Real-Debrid?**
-   Real-Debrid is a multi-hoster caching service. It caches data on its high-speed servers and provides direct access â€” meaning you access content from their secure servers rather than via public peer networks. It also acts as an encrypted layer so your connection is protected. TLDR: You can stream content without getting caught. 
+   Real-Debrid is a multi-hoster caching service. It caches data on its high-speed servers and provides direct access — meaning you access content from their secure servers rather than via public peer networks. It also acts as an encrypted layer so your connection is protected. TLDR: You can stream content without getting caught. 
 
 2. **Each person MUST have their own Real-Debrid account.**
-   > âš ï¸ **DO NOT share a Real-Debrid account with anyone, even within the same household or city.** Real-Debrid actively monitors for account sharing. If two people use the same account from different IPs (even in the same city), your account **WILL be permanently banned** with no refund. I learned this the hard way. Buy your own subscription â€” it's like $4/month. This is non-negotiable. You will setup this via an app called Privacy on your phone. Download that now. 
+   > ⚠️ **DO NOT share a Real-Debrid account with anyone, even within the same household or city.** Real-Debrid actively monitors for account sharing. If two people use the same account from different IPs (even in the same city), your account **WILL be permanently banned** with no refund. I learned this the hard way. Buy your own subscription — it's like $4/month. This is non-negotiable. You will setup this via an app called Privacy on your phone. Download that now. 
 
 3. **Why is my stream buffering?**
    Streaming = downloading in real time. If it buffers, your internet is too slow for the file size you picked. Pick a smaller file or check your connection.
@@ -19,7 +19,7 @@
 
 ---
 
-## ðŸ“‹ Table of Contents
+## 📋 Table of Contents
 - [Prerequisites & Accounts Needed](#prerequisites--accounts-needed)
 - [Real-Debrid Setup](#real-debrid-setup)
 - [Installation](#installation)
@@ -38,14 +38,14 @@
 
 ---
 
-## ðŸ”‘ Prerequisites & Accounts Needed
-Before you begin, ensure you have the following accounts and software ready. The first two are **required** â€” the rest are strongly recommended.
+## 🔑 Prerequisites & Accounts Needed
+Before you begin, ensure you have the following accounts and software ready. The first two are **required** — the rest are strongly recommended.
 
 ### Required Accounts
 1.  **Real-Debrid**
-    *   *Why?* For high-quality, buffer-free media access. **This is required â€” nothing works without it.**
+    *   *Why?* For high-quality, buffer-free media access. **This is required — nothing works without it.**
     *   *Sign up:* [https://real-debrid.com/?id=9373068](https://real-debrid.com/?id=9373068)
-    *   âš ï¸ **You MUST have your own account. Do NOT share with anyone. Account sharing = permanent ban.**
+    *   ⚠️ **You MUST have your own account. Do NOT share with anyone. Account sharing = permanent ban.**
     *   *Cost:* ~$4/month (180-day plan is best value)
 
 2.  **Trakt.tv**
@@ -71,17 +71,17 @@ Before you begin, ensure you have the following accounts and software ready. The
 
 ---
 
-## ðŸ”— Real-Debrid Setup
+## 🔗 Real-Debrid Setup
 
 Real-Debrid is essential for high-speed streaming. Set up your account **before** installing the build so you're ready to authorize when prompted.
 
-> âš ï¸ **REMINDER: Each person needs their OWN Real-Debrid account. Sharing an account (even within the same city) WILL get your account permanently banned. Each account provides one stream at a time.**
+> ⚠️ **REMINDER: Each person needs their OWN Real-Debrid account. Sharing an account (even within the same city) WILL get your account permanently banned. Each account provides one stream at a time.**
 
 1. **Sign up for Real-Debrid**
     *   Go to [https://real-debrid.com](https://real-debrid.com/?id=9373068)
     *   Sign up for an account.
     *   Click this link after verifying your account to purchase premium: [http://real-debrid.com/?id=9373068](https://real-debrid.com/?id=9373068). This is my affiliate link which gets you a cheaper price. **Buy the 180-day option for best value.**
-    *   To pay, I use an app on my phone called **Privacy** to generate a virtual card. This app is safe and trusted â€” I've used it for years. Set up a temporary card, limit it to $20.
+    *   To pay, I use an app on my phone called **Privacy** to generate a virtual card. This app is safe and trusted — I've used it for years. Set up a temporary card, limit it to $20.
     *   Ensure you have premium by checking your account on the website. It will say "premium:" with the duration remaining (e.g., 180 days).
 
 2. **How Authorization Works (When Prompted Later)**
