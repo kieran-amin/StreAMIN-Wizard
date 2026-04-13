@@ -118,7 +118,7 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 
 ### Step 3: Download the Wizard
 
-1.  Go to the KieranWizard GitHub **Releases** page: [https://github.com/kieran-amin/plugin.program.kieranwizard/releases](https://github.com/kieran-amin/plugin.program.kieranwizard/releases)
+1.  Go to the KieranWizard GitHub **Releases** page: [https://github.com/kieran-amin/StreAMIN-Wizard/releases](https://github.com/kieran-amin/StreAMIN-Wizard/releases)
 2.  Click the **latest release** at the top.
 3.  Under **"Assets"**, click **`plugin.program.kieranwizard-1.0.0.zip`** to download it.
 4.  **Do not unzip it.** Kodi installs directly from the `.zip` file.
