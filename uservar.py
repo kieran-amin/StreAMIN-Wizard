@@ -17,7 +17,7 @@ ADDONTITLE = '[COLOR darkgreen][B]Kieran[/B][/COLOR]Wizard'
 BUILDERNAME = 'KieranWizard'
 EXCLUDES = [ADDON_ID, 'repository.kieranwizard', 'xbmc.addon', 'xbmc.gui']
 # Text File with build info in it. Please read https://github.com/a4k-openproject/plugin.program.openwizard/wiki/Installing-Builds
-BUILDFILE = 'http://'  # TODO: Change to hosted URL before distribution (was http://localhost:8000/builds.txt)
+BUILDFILE = 'https://raw.githubusercontent.com/kieran-amin/StreAMIN-Wizard/main/builds.txt'
 # How often you would like it to check for build updates in days
 # 0 being every startup of kodi
 UPDATECHECK = 0
