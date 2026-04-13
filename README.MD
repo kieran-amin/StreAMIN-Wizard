@@ -1,225 +1,327 @@
-# KieranWizard
+﻿Welcome to the official tutorial for KieranWizard! This guide will walk you through everything you need to knowâ€”from installation to advanced tips and tricks.
 
-Welcome to **KieranWizard** — a Kodi layout manager that installs and manages the StreAMIN build, including automated Real-Debrid and Trakt account authorization guidance.
+## âš ï¸ READ THIS FIRST â€” Common Questions & Rules
 
----
+> **Stop.** Read this entire section before texting/calling me. If you call me and I can tell it's your first time reading these instructions, I will come find you. Charles, don't make me come to Madison. 
 
-## Table of Contents
+1. **Why do I need Real-Debrid?**
+   Real-Debrid is a multi-hoster caching service. It caches data on its high-speed servers and provides direct access â€” meaning you access content from their secure servers rather than via public peer networks. It also acts as an encrypted layer so your connection is protected. TLDR: You can stream content without getting caught. 
 
-1. [Requirements](#requirements)
-2. [Installation](#installation)
-3. [Installing the Base Pack & Layout Pack](#installing-the-base-pack--layout-pack)
-4. [Setup Checklist Screen](#setup-checklist-screen)
-5. [Removing the Setup Screen Manually](#removing-the-setup-screen-manually)
-6. [Updating Your Layout](#updating-your-layout)
-7. [Troubleshooting](#troubleshooting)
+2. **Each person MUST have their own Real-Debrid account.**
+   > âš ï¸ **DO NOT share a Real-Debrid account with anyone, even within the same household or city.** Real-Debrid actively monitors for account sharing. If two people use the same account from different IPs (even in the same city), your account **WILL be permanently banned** with no refund. I learned this the hard way. Buy your own subscription â€” it's like $4/month. This is non-negotiable. You will setup this via an app called Privacy on your phone. Download that now. 
 
----
+3. **Why is my stream buffering?**
+   Streaming = downloading in real time. If it buffers, your internet is too slow for the file size you picked. Pick a smaller file or check your connection.
 
-## Requirements
+4. **For now, use only on laptop.** I will provide Firestick instructions later (they suck) and Onn 4K Pro instructions (which is good).
 
-Before you begin, make sure you have:
-
-- **Kodi 21 (Nexus)** or later installed
-- A **Real-Debrid** account — [realdebrid.com](https://real-debrid.com)
-- A **Trakt** account — [trakt.tv](https://trakt.tv)
-- An internet connection
+5. **Do NOT call me with questions about Trakt or Real-Debrid setup.** These are straightforward services with their own help pages. Google it. I will help with issues with the build itself.
 
 ---
 
-## Installation
-
-### Step 1 — Download the KieranWizard zip
-
-1. On this GitHub page, click the green **`<> Code`** button near the top-right
-2. Select **Download ZIP** from the dropdown
-3. Save the file somewhere easy to find (e.g. your **Downloads** folder or a USB drive)
-
-> 💡 **Do not unzip the file.** Kodi installs directly from the zip as downloaded.
-
----
-
-### Step 2 — Enable Unknown Sources in Kodi
-
-Kodi blocks zip installs by default. You only need to do this once:
-
-1. Open Kodi → click the **⚙️ Settings** icon on the home screen
-2. Go to **System** → **Add-ons**
-3. Toggle **"Unknown sources"** to **ON**
-4. Click **Yes** on the warning that appears
+## ðŸ“‹ Table of Contents
+- [Prerequisites & Accounts Needed](#prerequisites--accounts-needed)
+- [Real-Debrid Setup](#real-debrid-setup)
+- [Installation](#installation)
+  - [Step 1: Install Kodi](#step-1-install-kodi)
+  - [Step 2: Enable Unknown Sources](#step-2-enable-unknown-sources)
+  - [Step 3: Download the Wizard](#step-3-download-the-wizard)
+  - [Step 4: Install the Wizard from Zip File](#step-4-install-the-wizard-from-zip-file)
+  - [Step 5: Install the Base Pack](#step-5-install-the-base-pack)
+  - [Step 6: Install the Layout Pack](#step-6-install-the-layout-pack)
+  - [Step 7: Authorize Your Accounts](#step-7-authorize-your-accounts)
+- [Setting up Addons](#setting-up-addons)
+- [How to Use](#how-to-use)
+- [Anime Configuration](#anime-configuration)
+- [Tips & Tricks](#tips--tricks)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
-### Step 3 — Install the zip in Kodi
+## ðŸ”‘ Prerequisites & Accounts Needed
+Before you begin, ensure you have the following accounts and software ready. The first two are **required** â€” the rest are strongly recommended.
 
-1. From the Kodi home screen, go to **Add-ons**
-2. Click the **📦 open box icon** in the top-left corner
-3. Select **Install from zip file**
-4. Navigate to your **Downloads** folder (or wherever you saved the zip) and select **`plugin.program.kieranwizard-1.0.0.zip`**
-5. Wait for the **"KieranWizard Add-on installed"** notification to appear in the top-right corner
-6. **Restart Kodi** — the wizard will launch automatically on the next boot
+### Required Accounts
+1.  **Real-Debrid**
+    *   *Why?* For high-quality, buffer-free media access. **This is required â€” nothing works without it.**
+    *   *Sign up:* [https://real-debrid.com/?id=9373068](https://real-debrid.com/?id=9373068)
+    *   âš ï¸ **You MUST have your own account. Do NOT share with anyone. Account sharing = permanent ban.**
+    *   *Cost:* ~$4/month (180-day plan is best value)
 
----
+2.  **Trakt.tv**
+    *   *Why?* To sync your watch history and get personalized recommendations.
+    *   *Sign up:* [https://trakt.tv](https://trakt.tv)
+    *   *Download the Trakt app on your phone as well*
 
-## Installing the Base Pack & Layout Pack
+### Recommended Accounts
+3.  **Opensubtitles.org**
+    *   *Why?* For subtitles.
+    *   *Sign up:* [https://opensubtitles.org](https://opensubtitles.org)
+    *   *Create a free account and remember your credentials. You'll type them into addon settings.*
 
-The build is split into two packs that must be installed **in order**:
+4.  **OMDB API**
+    *   *Why?* For movie and TV show information and ratings from sources such as IMDb, Rotten Tomatoes and displays awards received.
+    *   *Sign up:* [https://www.omdbapi.com](https://www.omdbapi.com/apikey.aspx?__EVENTTARGET=freeAcct&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFgICBw8WAh4HVmlzaWJsZWhkAgIPFgIfAGhkAgMPFgIfAGhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBQtwYXRyZW9uQWNjdAUIZnJlZUFjY3QFCGZyZWVBY2N0MXBaUo2PpHbEmO0KsvHCBMiAqbwPSispxmMnBH5rXb8%3D&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAV6O6wfBwA%2F81aWW2BYfVtumSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYpioiDjxFjSdCQfbG0SWduXFd8BcWGH1ot0k0SO7CfuulGztfcyzE1Lkxwo9dYYBItHiFDZeQhYzawd9QWEG%2BI9i&at=freeAcct&Email=)
+    *   *Request a free API key. Set the use as "personal media hub."*
 
-| Pack | What it installs | Install order |
-|---|---|---|
-| **Base Pack** | Core add-ons (Fen Light, TMDb Helper, etc.) | **First** |
-| **Layout Pack** | Skin, home screen menus, shortcuts | **Second** |
-
-### How to Install
-
-1. Open the **KieranWizard** addon from your Kodi home screen or Add-ons menu
-2. Select **Install Layout Pack**
-3. Choose **Base Pack** → confirm the install and wait for it to complete
-4. Once done, go back and choose **Layout Pack** → enter the passcode when prompted → confirm
-5. Kodi will restart automatically after the Layout Pack installs
-6. After the restart, the **Setup Checklist screen** will appear on your home screen
-
-> ⚠️ **Important:** Always install the Base Pack before the Layout Pack. Installing out of order may cause missing add-ons or a broken home screen.
-
----
-
-## Setup Checklist Screen
-
-After the Layout Pack is installed, a **Setup Checklist** screen will appear as your home screen. This screen guides you through the three required authorization steps to get Real-Debrid and Trakt working.
-
-**The screen will remain visible until you complete all steps and press Finalize.** This is intentional — it ensures you don't accidentally skip authorization.
-
-### The 4 Items on the Checklist
-
-Each item shows a ✓ (green) when complete or ✗ (red) when still pending.
+5.  **MyAnimeList** *(only if you watch anime)*
+    *   *Why?* To sync your anime watch history and lists.
+    *   *Sign up:* [https://myanimelist.net](https://myanimelist.net)
+    *   *Download the MAL app on your phone as well*
 
 ---
 
-#### Step 1: Initialize Debrid
+## ðŸ”— Real-Debrid Setup
 
-This authorizes your **Real-Debrid** account inside **Fen Light**, which is the main streaming add-on.
+Real-Debrid is essential for high-speed streaming. Set up your account **before** installing the build so you're ready to authorize when prompted.
 
-1. Click **Step 1: Initialize Debrid** on the home screen
-2. The **Fen Light settings** window will open automatically
-3. Navigate to the **Accounts** or **Real-Debrid** section inside Fen Light settings
-4. Select **Authorize Real-Debrid** and follow the on-screen instructions:
-   - A code will be displayed — go to [real-debrid.com/device](https://real-debrid.com/device) on your phone or computer
-   - Enter the code and click Authorize
-5. Once the Kodi window closes, a dialog will ask **"Did you successfully authorize Real-Debrid?"**
-6. Select **Yes** — the item will show a ✓ and be marked complete
+> âš ï¸ **REMINDER: Each person needs their OWN Real-Debrid account. Sharing an account (even within the same city) WILL get your account permanently banned. Each account provides one stream at a time.**
 
-> If you made a mistake or need to redo it, simply click the item again.
+1. **Sign up for Real-Debrid**
+    *   Go to [https://real-debrid.com](https://real-debrid.com/?id=9373068)
+    *   Sign up for an account.
+    *   Click this link after verifying your account to purchase premium: [http://real-debrid.com/?id=9373068](https://real-debrid.com/?id=9373068). This is my affiliate link which gets you a cheaper price. **Buy the 180-day option for best value.**
+    *   To pay, I use an app on my phone called **Privacy** to generate a virtual card. This app is safe and trusted â€” I've used it for years. Set up a temporary card, limit it to $20.
+    *   Ensure you have premium by checking your account on the website. It will say "premium:" with the duration remaining (e.g., 180 days).
 
----
-
-#### Step 2: Trakt 1 (Fen Light)
-
-This authorizes your **Trakt** account inside **Fen Light** so it can track your watch history and sync your lists.
-
-1. Click **Step 2: Trakt 1 (Fen Light)** on the home screen
-2. The **Fen Light settings** window will open
-3. Navigate to the **Trakt** section inside Fen Light settings
-4. Select **Authorize Trakt** and follow the on-screen instructions:
-   - A code will be displayed — go to [trakt.tv/activate](https://trakt.tv/activate) on your phone or computer
-   - Enter the code and click Authorize
-5. Once the window closes, confirm with **Yes** when asked
-6. The item will show a ✓
+2. **How Authorization Works (When Prompted Later)**
+    *   A code will appear on your Kodi screen (e.g., `AB12-CD34`).
+    *   On your phone or computer, go to [https://real-debrid.com/device](https://real-debrid.com/device).
+    *   Log in if needed and enter the code displayed on your TV/screen.
+    *   Once authorized, you will see a confirmation. You can now stream with premium links.
 
 ---
 
-#### Step 3: Trakt 2 (TMDb Helper)
+## 🚀 Installation
 
-This authorizes **Trakt** a second time inside **TMDb Helper**, which powers artwork, cast info, and recommendations. Both add-ons need their own separate Trakt authorization.
+Follow these steps **in order**. The build installs in two parts: a **Base Pack** (core addons) and a **Layout Pack** (skin and menus). Do not skip steps.
 
-1. Click **Step 3: Trakt 2 (TMDb Helper)** on the home screen
-2. The **TMDb Helper Trakt authorization** will launch directly (no settings window needed)
-3. Follow the same steps as above — go to [trakt.tv/activate](https://trakt.tv/activate) and enter the displayed code
-4. Confirm with **Yes** when asked
-5. The item will show a ✓
+### Step 1: Install Kodi
 
----
+1.  Download **Kodi 21 Omega** from [https://kodi.tv/download](https://kodi.tv/download).
+2.  Choose the correct version for your operating system (Windows, macOS, Android, etc.).
+3.  Run the installer and follow the on-screen prompts.
+4.  Launch Kodi once and let it finish its initial setup. You should see the default Kodi home screen (Estuary skin).
 
-#### Finalize Setup & Restart
+### Step 2: Enable Unknown Sources
 
-Once all three steps show a ✓, click **Finalize Setup & Restart**.
+Kodi blocks third-party add-on installations by default. You must enable "Unknown Sources" to install the wizard.
 
-- If any steps are still incomplete, you will be asked if you want to finish anyway — you can choose to skip and come back later
-- When confirmed, the Setup screen will be **permanently disabled**
-- Kodi will **restart automatically** to apply the changes
-- After the restart, your normal home screen will load — the Setup screen will be gone
+1.  From the Kodi home screen, click the **gear icon** ⚙️ (top-left) to open **Settings**.
+2.  Click **System**.
+3.  On the left sidebar, click **Add-ons**.
+4.  > ⚠️ **Important:** If you don't see the "Add-ons" option in System settings, you may need to change the settings level. In the bottom-left corner of the Settings page, click the gear icon until it says **"Advanced"** or **"Expert"**.
+5.  Toggle **"Unknown sources"** to **ON**.
+6.  A warning popup will appear — click **Yes** to confirm.
+7.  Press **Esc** or **Back** to return to the home screen.
 
-> The Setup screen will not come back on its own. If you need to re-run authorization (e.g. after a layout pack reinstall), see [Removing the Setup Screen Manually](#removing-the-setup-screen-manually) below.
 
----
+### Step 3: Download the Wizard
 
-## Removing the Setup Screen Manually
-
-There are two ways to bring back or permanently dismiss the Setup screen outside of the normal flow.
-
----
-
-### Method 1 — Via KieranWizard (Recommended)
-
-1. From your home screen, navigate to the **KieranWizard** addon (or press your shortcut key)
-2. Scroll down and select **Reset Setup Checklist**
-3. All checkmarks will be cleared and the Setup screen will reappear on your home screen on the next skin reload
-
-To **permanently dismiss** (hide the screen without completing setup):
-1. Open **KieranWizard** → **Setup Checklist**
-2. Click **Finalize Setup & Restart** — you will be given the option to finish even if steps are incomplete
+1.  Go to the KieranWizard GitHub **Releases** page: [https://github.com/kieran-amin/plugin.program.kieranwizard/releases](https://github.com/kieran-amin/plugin.program.kieranwizard/releases)
+2.  Click the **latest release** at the top.
+3.  Under **"Assets"**, click **`plugin.program.kieranwizard-1.0.0.zip`** to download it.
+4.  **Do not unzip it.** Kodi installs directly from the `.zip` file.
+5.  Note where the file saved — by default it goes to your **Downloads** folder.
 
 ---
 
-### Method 2 — Via Kodi Skin Settings
+### Step 4: Install the Wizard from Zip File
 
-The Setup screen visibility is controlled by a skin boolean called `SetupComplete`. You can toggle this manually:
+1.  From the Kodi home screen, click **Add-ons** in the left sidebar.
+2.  Click the **open box icon** 📦 in the top-left corner — this opens the Add-on browser.
+3.  Select **"Install from zip file"**.
+4.  If a popup about Unknown Sources appears, click **Settings** and enable it (see Step 2), then come back.
+5.  A file browser will open. Navigate to your **Downloads** folder:
 
-1. In Kodi, go to **Settings** → **Interface** → **Skin**
-2. Click **Configure skin...**
-3. Look for a setting called **SetupComplete** or browse the boolean/toggle settings
-4. **Enable** `SetupComplete` → the Setup screen will be hidden
-5. **Disable** `SetupComplete` → the Setup screen will reappear
+#### 🖥️ Windows
+- In the file browser, scroll up and look for **`Home folder`** (or your username, e.g. `C:\Users\YourName`).
+- Open it, then open the **`Downloads`** folder.
+- Find and click **`plugin.program.kieranwizard-1.0.0.zip`**.
 
-> Note: The exact location of skin settings depends on your installed skin. If you cannot find it in **Configure skin**, use Method 1 instead — it is more reliable.
+> ⚠️ **Can't find your Downloads folder?** Kodi's file browser starts in its own folder. Keep scrolling up past `Root filesystem` until you see your user folders, or look under **`Windows`** → **`C:`** → **`Users`** → **`(your username)`** → **`Downloads`**.
+
+6.  Wait for the **"KieranWizard Add-on installed"** notification to appear in the top-right corner. This may take 10-20 seconds.
+
+### Step 5: Install the Base Pack
+
+The Base Pack installs all the core addons and settings. **You must install this first.**
+
+1.  After the wizard is installed, **restart Kodi** — close it completely and reopen it.
+2.  The wizard will launch automatically and show a build prompt. Click **"Build Menu"**.
+    *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard** manually.
+3.  Select **"Base Pack"** from the list.
+4.  Click **"Fresh Install"**.
+5.  Confirm by clicking **"Yes"**.
+6.  A progress bar will appear — wait for the download and extraction to complete. Do not interact with Kodi during this time.
+7.  When prompted, click **OK** to **force close Kodi**.
+8.  **Reopen Kodi** and wait for it to fully load. The first boot after the Base Pack install may take 1-2 minutes.
+
+> 💡 **Tip:** Do NOT click anything while Kodi is initializing after this install. Let it finish on its own.
+
+### Step 6: Install the Layout Pack
+
+The Layout Pack applies the custom skin, menu layout, and widgets I created on top of the Base Pack. You should appreciate this greatness, I spent a while setting up the layout. Install this **after** the Base Pack.
+
+1.  After Kodi fully loads, the wizard will launch automatically again. Click **"Build Menu"**.
+    *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard**.
+2.  Select **"Layout Pack"** from the list.
+3.  Click **"Fresh Install"**.
+4.  Confirm by clicking **"Yes"**.
+5.  Wait for the download and extraction to complete.
+6.  When prompted, click **OK** to **force close Kodi**.
+7.  **Reopen Kodi.** The custom skin and layout should now be active.
+
+### Step 7: Authorize Your Accounts (Setup Checklist)
+
+After Kodi restarts with the Layout Pack installed, a **Setup Checklist** widget will appear directly on your home screen. This is designed to make authorization as easy as possible.
+
+#### Using the Setup Checklist Widget
+1.  **Authorize Real-Debrid:** Click this item. It will open the Fen Light settings. Navigate to **Accounts** -> **Real-Debrid** -> **Authorize**. Enter the code at [real-debrid.com/device](https://real-debrid.com/device).
+2.  **Authorize Trakt (Fen Light):** Click this item. It will open the Fen Light settings. Navigate to **Accounts** -> **Trakt** -> **Authorize**. Enter the code at [trakt.tv/activate](https://trakt.tv/activate).
+3.  **Authorize Trakt (TMDb):** Click this item. It will directly open the Trakt code window. Enter the code at [trakt.tv/activate](https://trakt.tv/activate).
+4.  **Finish Setup & Restart:** Once you see green checkmarks **(✓)** next to the first three items, click this final right option. Kodi will ask for confirmation and then restart. **The setup screen will then be hidden.**
 
 ---
 
-### Method 3 — Via Kodi Debug Console (Advanced)
+### 🛠️ Backup Instructions (If the Widget Fails)
 
-If you have access to a Kodi remote or debug interface, you can run this command directly:
+If clicking the widget items does not open the correct menus, or if you need to re-authorize manually at any time, follow these steps:
 
-**To hide the Setup screen:**
-```
-Skin.SetBool(SetupComplete)
-```
+#### 1. Manually Authorizing Fen Light (Movies & TV)
+*   Go to **Settings** (gear icon) -> **Add-ons** -> **My Add-ons** -> **Video Add-ons** -> **Fen Light** -> **Configure**.
+*   **Real-Debrid:** Go to **Accounts** -> **Real-Debrid** -> **Authorize**.
+*   **Trakt:** Go to **Accounts** -> **Trakt** -> **Authorize**.
 
-**To show the Setup screen again:**
-```
-Skin.Reset(SetupComplete)
-```
+#### 2. Manually Authorizing TMDb Helper (Widgets)
+*   Go to **Settings** -> **Add-ons** -> **My Add-ons** -> **Video Add-ons** -> **TheMovieDb Helper** -> **Configure**.
+*   **Trakt:** Go to **Accounts** -> **Trakt** -> **Authorize**.
 
-These can be entered via **Kodi's built-in keyboard shortcut** (if enabled) or through a remote control app that supports Kodi commands.
-
----
-
-## Updating Your Layout
-
-When a new Layout Pack version is released:
-
-1. Open **KieranWizard** → **Install Layout Pack**
-2. Select **Layout Pack** — if an update is available it will show an **[UPDATE]** badge
-3. Install as normal — your saved data (Trakt, Debrid) will be preserved if you selected "Keep" during install
-4. After the update, the Setup Checklist screen may reappear — this is by design, as new layout versions may require re-authorization
+#### 3. Re-running the Wizard Setup
+*   Go to **Add-ons** -> **Program Add-ons** -> **KieranWizard**.
+*   Select **Post-Install Setup** to open the original popup menu version of the checklist.
+*   Select **Maintenance** -> **Clean Install** if you need to start fresh (⚠️ This wipes your data!).
 
 ---
 
-## Troubleshooting
+## 🧩 Setting up Addons
 
-| Problem | Solution |
-|---|---|
-| Setup screen won't disappear after Finalize | Go to KieranWizard → Reset Setup Checklist → then re-run Finalize |
-| Trakt not tracking plays | Repeat Step 2 or Step 3 — one of the authorizations may have expired |
-| Real-Debrid links not working | Repeat Step 1 — your token may have expired. Re-authorize in Fen Light settings |
-| Layout Pack install fails | Ensure Base Pack is installed first. Check your internet connection |
-| Can't find KieranWizard in add-ons | Go to Add-ons → My add-ons → Program add-ons → KieranWizard |
-| Setup Checklist screen missing | It was completed. Use Method 2 or 3 above to reset it if needed |
+If you need to manually configure addons (or if you skipped the Post-Install Setup), here's how to do it for each addon.
+
+### 1. Fen Light (Movies & TV)
+This is the main add-on for Movies and TV Shows.
+*   **Location:** Settings -> Add-ons -> My Add-ons -> Video Add-ons -> **Fen Light** -> Configure.
+*   **Real-Debrid:** Go to *Accounts* -> *Real-Debrid* -> Enable -> Authorize. (Follow the prompts on your device).
+*   **Trakt:** Go to *Accounts* -> *Trakt* -> Authorize. (You will need to enter a code at https://trakt.tv/activate).
+*   **OMDB:** Go to *Accounts* -> *Meta Accounts* -> Enable OMDB -> Enter your API Key.
+
+### 2. Otaku Testing (Anime)
+This is the main add-on for Anime.
+*   **Wizard:** A setup wizard may run on first launch; follow the steps if prompted.
+*   **Location:** Settings -> Add-ons -> My Add-ons -> Video Add-ons -> **Otaku Testing** -> Configure.
+*   **Real-Debrid:** Go to *Accounts* -> *Debrid* -> Authorize Real-Debrid.
+*   **MyAnimeList:** Go to *Accounts* -> *Tracking* -> Enable MyAnimeList -> Authorize.
+
+### 3. TMDb Helper (Widgets/Information)
+This add-on powers the home screen widgets and information screens.
+*   **Location:** Settings -> Add-ons -> My Add-ons -> Video Add-ons -> **TheMovieDb Helper** -> Configure.
+*   **Trakt:** Go to *Accounts* -> *Trakt* -> Authorize.
+*   **OMDB:** Go to *Accounts* -> *API Keys* -> OMDB API Key -> Enter your Key.
+
+### 4. A4k Subtitles
+This provides the subtitles for your content.
+*   **Location:** Settings -> Add-ons -> My Add-ons -> Subtitles -> **a4kSubtitles** -> Configure.
+*   **OpenSubtitles:** Go to *Authentications* -> Enter your **OpenSubtitles.org** Username and Password.
+
+---
+
+## 🎮 How to Use
+
+### Main Menu Navigation
+*   **Movies/TV Shows:** Browse trending content. Use widgets to quickly jump into your next episode.
+*   **Anime:** Specialized section for anime content (if using the Anime Layout).
+*   **Settings:** Customize skin settings, widgets, and players.
+
+### Keeping Your Build Updated
+*   The wizard checks for layout updates automatically. If a new version is available, you'll see a notification when Kodi starts.
+*   You can also check manually: **Add-ons** → **Program add-ons** → **KieranWizard** — look for `[UPDATE]` next to the build name.
+
+### Standard Features
+*   **Search:** Use the global search icon to find content across all providers.
+*   **Library Integration:** Add content to your library for faster access.
+
+---
+
+## 🌸 Anime Configuration
+
+If you are using the Anime features, these settings are recommended for the best experience.
+
+### Extra Settings Needed
+*   **Enable Otaku Testing Add-on:** Ensure your anime add-on (e.g., Otaku, Haru) is enabled and configured.
+*   **Run the Setup Wizard:** If the setup wizard has not run, go into the top right menu -> addons -> my addons -> video addons -> otaku testing -> right click and click settings -> click run setup wizard. You need to sync Real Debrid into this add-on.
+*   **Real Debrid Cloud Access:** Best way to utilize Real Debrid and watch anime. For many titles, collections come as a whole series rather than individual episodes. Search for the title you want on a media hub.
+
+### Finding Good Collections
+Criteria to look for:
+*   Highlighted packs (trusted/high quality)
+*   High popularity ratings
+*   Multi-audio (includes dub and sub)
+*   Keep an eye on file size — DO NOT exceed 100GB for most titles.
+*   For current weekly releases, just watch them as they come out directly in the anime addon.
+
+### How to Use Cloud Access
+1.  Find a file collection on your cloud provider.
+2.  Copy the magnet link.
+3.  Go to Real-Debrid website → Cloud → Paste the link → Download
+4.  Now inside the anime addon, the collection will be in your cloud. The addon will automatically grab the correct episodes with subtitles/dub.
+
+> 💡 **Best Practice:** Use cloud torrents for completed/older anime. For currently airing/modern shows, stream them directly.
+
+### Additional Anime Tips
+*   **Watch Status Sync:** Go to the Anime Add-on Settings → *Accounts* and link your **MyAnimeList** account. This ensures your progress is saved.
+*   **Debrid in Anime Add-on:** Even if you authorized Debrid for movies, you might need to re-authorize it specifically inside the Anime Add-on settings.
+*   **Dub vs Sub:** Check the playback settings to prioritize your preferred audio language.
+*   **Simulcasts:** Use the "Airing Now" or "Schedule" widgets to keep up with currently airing shows.
+*   **Sync Issues:** If shows aren't appearing, try "Force Sync" in the add-on menu.
+
+---
+
+## 💡 Tips & Tricks
+
+*   **Re-run Post-Install Setup:** If you need to re-authorize accounts, open KieranWizard from Program Add-ons and select **"Post-Install Setup"** from the main menu.
+*   **Speed Up Menus:** Disable widgets you don't use in the Skin Settings to improve performance on lower-end devices.
+*   **Context Menu:** Long-press (or right-click) on any item to see more options like "Trakt Manager," "Play Next," or "Related."
+*   **Refresh Skin:** If a widget isn't loading, select "Reload Skin" from the Power Menu.
+*   **Force Close Properly:** Always force close Kodi after installing a pack. On Windows, use Task Manager if needed. On Android/Firestick, use Force Stop from the app settings.
+
+---
+
+## ❓ Troubleshooting
+
+**Issue: "No Stream Available"**
+*   *Fix:* Check if your Real-Debrid subscription is active and re-authorize your account.
+
+**Issue: Build Not Saving Settings**
+*   *Fix:* Ensure you exited Kodi correctly (Force Close) after installation.
+
+**Issue: Buffering**
+*   *Fix:* Try a smaller file size link or check your internet speed.
+
+**Issue: Skin reverts to default after install**
+*   *Fix:* This means the GuiFix didn't apply correctly. Open KieranWizard → Build Menu → select your pack → click "Apply guiFix". Then force close Kodi.
+
+**Issue: Addons showing "disabled" or grayed out**
+*   *Fix:* Open KieranWizard. On startup, it should automatically enable all addons. If not, go to Maintenance → Addon Tools → Enable/Disable Addons and enable them manually.
+
+**Issue: Wizard not appearing on startup**
+*   *Fix:* Go to Add-ons → Program add-ons → KieranWizard to open it manually. The wizard runs as a startup service, but it waits for Kodi to finish loading before showing prompts.
+
+**Issue: Post-Install Setup disappeared before I finished**
+*   *Fix:* Go to Add-ons → Program add-ons → KieranWizard → **Post-Install Setup** to re-run the authorization menu.
+
+**Issue: Real-Debrid account got banned**
+*   *Fix:* You were likely sharing an account. Each person needs their own RD account. Create a new account and purchase a new subscription.
+
+---
+
+*Created by Kieran Amin*
