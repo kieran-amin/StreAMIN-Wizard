@@ -348,10 +348,10 @@ else:
 
 # POST INSTALL SETUP
 if CONFIG.get_setting('post_install_setup') == 'true':
-    logging.log("[Post Install Setup] Started", level=xbmc.LOGINFO)
+    logging.log("[Post Install Setup] Bypassed forced popup loop - trusting homescreen widget", level=xbmc.LOGINFO)
     CONFIG.set_setting('post_install_setup', 'false')
-    from resources.libs import accounts
-    accounts.Accounts().post_install_loop()
+    # from resources.libs import accounts
+    # accounts.Accounts().post_install_loop()
 
 # RE-APPLY SETUP COMPLETE SKIN BOOL
 # Skin.SetBool is session-only and is lost when Kodi restarts.

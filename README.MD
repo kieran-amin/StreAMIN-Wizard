@@ -132,55 +132,70 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 2.  Click the **open box icon** 📦 in the top-left corner — this opens the Add-on browser.
 3.  Select **"Install from zip file"**.
 4.  If a popup about Unknown Sources appears, click **Settings** and enable it (see Step 2), then come back.
-5.  A file browser will open. Navigate to your **Downloads** folder:
+5.  A file browser will open. The easiest way to find your file is to select **`Home folder`**:
 
-#### 🖥️ Windows
-- In the file browser, scroll up and look for **`Home folder`** (or your username, e.g. `C:\Users\YourName`).
-- Open it, then open the **`Downloads`** folder.
+- Scroll up and click **`Home folder`**.
+- Open the **`Downloads`** folder.
 - Find and click **`plugin.program.kieranwizard-1.0.0.zip`**.
 
-> ⚠️ **Can't find your Downloads folder?** Kodi's file browser starts in its own folder. Keep scrolling up past `Root filesystem` until you see your user folders, or look under **`Windows`** → **`C:`** → **`Users`** → **`(your username)`** → **`Downloads`**.
+> ⚠️ **Can't find "Home folder"?** Keep scrolling up past `Root filesystem` until you see it, or look under:
+> - **Windows:** `C:` → `Users` → `(your username)` → `Downloads`
+> - **macOS:** `Users` → `(your username)` → `Downloads`
 
 6.  Wait for the **"KieranWizard Add-on installed"** notification to appear in the top-right corner. This may take 10-20 seconds.
+
+> ⚠️ **IMPORTANT:** Ensure you **do not have a VPN active** during the installation process as it can interfere with the downloads.
 
 ### Step 5: Install the Base Pack
 
 The Base Pack installs all the core addons and settings. **You must install this first.**
 
 1.  After the wizard is installed, **restart Kodi** — close it completely and reopen it.
-2.  The wizard will launch automatically and show a build prompt. Click **"Build Menu"**.
+2.  The wizard will launch automatically. **Do not select any settings for first install** — just click **Continue** and then click **Build Menu**.
     *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard** manually.
 3.  Select **"Base Pack"** from the list.
-4.  Click **"Fresh Install"**.
-5.  Confirm by clicking **"Yes"**.
-6.  A progress bar will appear — wait for the download and extraction to complete. Do not interact with Kodi during this time.
-7.  When prompted, click **OK** to **force close Kodi**.
-8.  **Reopen Kodi** and wait for it to fully load. The first boot after the Base Pack install may take 1-2 minutes.
-
-> 💡 **Tip:** Do NOT click anything while Kodi is initializing after this install. Let it finish on its own.
+4.  Click **"(KieranWizard) Install"**.
+5.  A progress bar will appear — wait for the download and extraction to complete.
+    *   💡 **Note:** If you see any errors during this part, **ignore them** — it should be fine.
+6.  When prompted, click **OK** to **force close Kodi**.
 
 ### Step 6: Install the Layout Pack
 
-The Layout Pack applies the custom skin, menu layout, and widgets I created on top of the Base Pack. You should appreciate this greatness, I spent a while setting up the layout. Install this **after** the Base Pack.
+The Layout Pack applies the custom skin, menu layout, and widgets. Install this **after** the Base Pack.
 
-1.  After Kodi fully loads, the wizard will launch automatically again. Click **"Build Menu"**.
-    *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard**.
-2.  Select **"Layout Pack"** from the list.
-3.  Click **"Fresh Install"**.
-4.  Confirm by clicking **"Yes"**.
-5.  Wait for the download and extraction to complete.
-6.  When prompted, click **OK** to **force close Kodi**.
-7.  **Reopen Kodi.** The custom skin and layout should now be active.
+1.  **Reopen Kodi** and wait for it to fully load. 
+2.  Find the **KieranWizard** row on the home screen.
+3.  Navigate over to the **third option** to install the Layout pack.
+4.  Select **`[21.0] Layout Pack (v1.0)`** and then click **"(KieranWizard) Install"**.
+5.  When prompted for a passcode, enter the trial passcode: **`KIERAN2026`**.
+6.  Wait for the installation to finish and **force close Kodi** again when prompted.
 
 ### Step 7: Authorize Your Accounts (Setup Checklist)
 
-After Kodi restarts with the Layout Pack installed, a **Setup Checklist** widget will appear directly on your home screen. This is designed to make authorization as easy as possible.
+After installing the layout pack and reopening Kodi, you will see a setup screen with several options: **Keep Debrid, Keep Trakt, Keep Trakt, Open Wizard, Settings**.
 
-#### Using the Setup Checklist Widget
-1.  **Authorize Real-Debrid:** Click this item. It will open the Fen Light settings. Navigate to **Accounts** -> **Real-Debrid** -> **Authorize**. Enter the code at [real-debrid.com/device](https://real-debrid.com/device).
-2.  **Authorize Trakt (Fen Light):** Click this item. It will open the Fen Light settings. Navigate to **Accounts** -> **Trakt** -> **Authorize**. Enter the code at [trakt.tv/activate](https://trakt.tv/activate).
-3.  **Authorize Trakt (TMDb):** Click this item. It will directly open the Trakt code window. Enter the code at [trakt.tv/activate](https://trakt.tv/activate).
-4.  **Finish Setup & Restart:** Once you see green checkmarks **(✓)** next to the first three items, click this final right option. Kodi will ask for confirmation and then restart. **The setup screen will then be hidden.**
+1.  **Authorize Fen Light:**
+    *   Open the first option: **Keep Debrid**.
+    *   Click the **Play button**.
+    *   Select **Open Fen Light Settings...** -> **Sources Accounts** -> **Real Debrid Authorize**.
+    *   Enter the code displayed at [real-debrid.com/device](https://real-debrid.com/device).
+    *   Go to **Meta Accounts** -> **Trakt** -> **Authorize**.
+    *   Enter the code displayed at [trakt.tv/activate](https://trakt.tv/activate).
+    *   *Tip: You can now keep hitting the **Backspace** or **Escape** key to return to the home setup screen.*
+
+2. **Authorize TMDb Helper:**
+    *   Open the third option: **Keep Trakt**.
+    *   Click the **Play button**.
+    *   Select **Open TheMovieDb Helper Settings...** -> **Accounts** -> **Trakt** -> **Authorize**.
+    *   Enter the code displayed at [trakt.tv/activate](https://trakt.tv/activate).
+    *   *Tip: You can now keep hitting the **Backspace** or **Escape** key to return to the home setup screen.*
+
+3.  **Finalize Setup:**
+    *   After authorizing your accounts, select the **Settings** option.
+    *   Click the **Play button**.
+    *   **Reload Kodi** (restart the app).
+
+**Your build is now fully set up and ready to use!**
 
 ---
 
@@ -286,13 +301,23 @@ Criteria to look for:
 
 ---
 
-## 💡 Tips & Tricks
-
-*   **Re-run Post-Install Setup:** If you need to re-authorize accounts, open KieranWizard from Program Add-ons and select **"Post-Install Setup"** from the main menu.
-*   **Speed Up Menus:** Disable widgets you don't use in the Skin Settings to improve performance on lower-end devices.
-*   **Context Menu:** Long-press (or right-click) on any item to see more options like "Trakt Manager," "Play Next," or "Related."
-*   **Refresh Skin:** If a widget isn't loading, select "Reload Skin" from the Power Menu.
 *   **Force Close Properly:** Always force close Kodi after installing a pack. On Windows, use Task Manager if needed. On Android/Firestick, use Force Stop from the app settings.
+
+### ⌨️ Handy Keyboard Shortcuts
+
+| Key | Action |
+| :--- | :--- |
+| **C** / **Right Click** | Open Context Menu (Subtitles, Trakt Manager, etc.) |
+| **I** | Show Information (Ratings, Plot, Cast) |
+| **Backspace** | Go Back (Return to previous screen) |
+| **Esc** | Go Home (Return to main home screen) |
+| **Space** / **P** | Play / Pause |
+| **X** | Stop Playback |
+| **F** | Toggle Fullscreen |
+| **M** | Show Player Controls |
+| **S** | Open Power / Restart Menu |
+| **Page Up / Down** | Skip 10 minutes Forward / Backward |
+| **Arrows** | Small step seek (Forward/Backward) |
 
 ---
 

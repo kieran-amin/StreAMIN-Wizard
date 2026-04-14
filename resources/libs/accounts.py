@@ -31,14 +31,30 @@ class Accounts:
     def _wait_for_window_close(self):
         """
         Wait for any auth-related windows (addon settings, dialogs, etc.) to close.
-        Polls every 500ms, max 10 minutes. This keeps the Python thread busy
-        so the dialog.select loop doesn't resume while the user is still
-        interacting with the auth window.
+        First waits up to 10 seconds for an auth window to appear, then waits
+        for the user to close it.
         """
-        # Give the window time to actually open first
-        xbmc.sleep(2000)
+        # 1. Wait dynamically up to 10 seconds for an auth window to appear
+        window_appeared = False
+        for _ in range(20):  # 20 * 500ms = 10 seconds
+            any_window_active = (
+                xbmc.getCondVisibility('Window.IsVisible(addonsettings)') or
+                xbmc.getCondVisibility('Window.IsVisible(yesnodialog)') or
+                xbmc.getCondVisibility('Window.IsVisible(okdialog)') or
+                xbmc.getCondVisibility('Window.IsVisible(progressdialog)') or
+                xbmc.getCondVisibility('Window.IsVisible(virtualkeyboard)')
+            )
+            if any_window_active:
+                window_appeared = True
+                break
+            xbmc.sleep(500)
+            
+        if not window_appeared:
+            # If no window spawned after 10 full seconds, proceed anyway
+            return
 
-        max_checks = 1200  # 10 minutes (1200 * 500ms)
+        # 2. Once a window has appeared, wait for it (up to 10 mins) to close
+        max_checks = 1200  # 10 minutes
         for _ in range(max_checks):
             any_window_active = (
                 xbmc.getCondVisibility('Window.IsVisible(addonsettings)') or
@@ -51,7 +67,7 @@ class Accounts:
                 break
             xbmc.sleep(500)
 
-        # Brief settle time for the UI
+        # Brief settle time for the UI backing out
         xbmc.sleep(500)
 
     def _run_auth(self, auth_command, addon_id, service_name):
