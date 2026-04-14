@@ -99,9 +99,13 @@ Follow these steps **in order**. The build installs in two parts: a **Base Pack*
 ### Step 1: Install Kodi
 
 1.  Download **Kodi 21 Omega** from [https://kodi.tv/download](https://kodi.tv/download).
-2.  Choose the correct version for your operating system (Windows, macOS, Android, etc.).
+2.  **Choosing the Right Version:**
+    *   **🍎 macOS:** If you have a modern Mac (M1, M2, M3), you **MUST** download the **Apple Silicon ARM64** version. 
+        *   *To verify:* Click the **Apple menu ** (top-left) -> **About This Mac**. Look for **"Chip"**. If it says Apple M1/M2/M3, you need **ARM64**.
+    *   **🖥️ Windows:** Most PCs require the **Installer (64BIT)** version. 
+        *   *To verify:* Go to **Settings** -> **System** -> **About**. Look for **"System type"** to confirm it says **64-bit**.
 3.  Run the installer and follow the on-screen prompts.
-4.  Launch Kodi once and let it finish its initial setup. You should see the default Kodi home screen (Estuary skin).
+4.  Launch Kodi once and let it finish its initial setup.
 
 ### Step 2: Enable Unknown Sources
 
