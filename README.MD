@@ -107,7 +107,7 @@ Follow these steps **in order**. The build installs in two parts: a **Base Pack*
 4.  Launch Kodi once and let it finish its initial setup.
 
 ### Step 2: Enable Unknown Sources
-
+I recommend using arrow keys and enter key to navigate Kodi (especially the setup). Once you have my build installed, mouse works a little better. I still use arrow keys. 
 Kodi blocks third-party add-on installations by default. You must enable "Unknown Sources" to install the wizard.
 
 1.  From the Kodi home screen, click the **gear icon** ⚙️ (top-left) to open **Settings**.
