@@ -1,5 +1,5 @@
 # ============================================================
-#  build_zip.ps1  –  Package plugin.program.kieranwizard
+#  build_zip.ps1  -  Package plugin.program.kieranwizard
 #  Run from the project root:  .\build_zip.ps1
 # ============================================================
 
@@ -31,7 +31,7 @@ Write-Host "Output  : $ZipPath`n"
 # Remove old ZIP if it exists
 if (Test-Path $ZipPath) {
     Remove-Item $ZipPath -Force
-    Write-Host "[✓] Removed old ZIP" -ForegroundColor Yellow
+    Write-Host "[OK] Removed old ZIP" -ForegroundColor Yellow
 }
 
 # Create a temp staging directory with the required top-level folder
@@ -40,7 +40,7 @@ $TempAddon  = Join-Path $TempRoot $AddonId
 
 if (Test-Path $TempRoot) { Remove-Item $TempRoot -Recurse -Force }
 New-Item -ItemType Directory -Path $TempAddon | Out-Null
-Write-Host "[✓] Created staging folder: $TempAddon" -ForegroundColor DarkGray
+Write-Host "[OK] Created staging folder: $TempAddon" -ForegroundColor DarkGray
 
 # Copy addon files into the staging folder
 Get-ChildItem -Path $ScriptDir | Where-Object {
@@ -57,11 +57,11 @@ Get-ChildItem -Path $ScriptDir | Where-Object {
 
 # Compress from the TEMP ROOT so the ZIP contains: plugin.program.kieranwizard/
 Compress-Archive -Path $TempAddon -DestinationPath $ZipPath -CompressionLevel Optimal
-Write-Host "`n[✓] ZIP created: $ZipPath" -ForegroundColor Green
+Write-Host "`n[OK] ZIP created: $ZipPath" -ForegroundColor Green
 
 # Cleanup
 Remove-Item $TempRoot -Recurse -Force
-Write-Host "[✓] Temp files cleaned up`n"
+Write-Host "[OK] Temp files cleaned up`n"
 
 # Verify structure
 Write-Host "--- ZIP contents (top-level) ---" -ForegroundColor Cyan
