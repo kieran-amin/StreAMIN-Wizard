@@ -164,32 +164,41 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 
 ### Step 6: Authorize Your Accounts (Setup Checklist)
 
-After reopening Kodi, you will see a setup checklist on the home screen. Work through each step in order.
+After reopening Kodi, your home screen will show the **Kieran Wizard** setup panel. You will see a row of tiles:
 
-> ⚠️ **For each step, an instruction dialog will appear first** — read it carefully, then click **OK** to open the addon settings. When you're done in settings, close them and answer **"Yes"** when asked if you authorized successfully.
+| Tile | Action |
+| :--- | :--- |
+| **Step 1: TMDb Helper — Trakt + OMDb Key** | Click to set up TMDb Helper |
+| **Step 2: Subtitles (Optional)** | Click to configure subtitles |
+| **Step 3: Fen Light — Trakt + Real-Debrid + OMDb** | Click to authorize Fen Light |
+| **>> Finish Setup <<** | Click when all steps are done |
 
-1.  **Step 1 — TMDb Helper:**
-    *   Click the Step 1 item → read the instructions → click **OK**.
-    *   TMDb Helper settings open. Go to **Accounts** → **Trakt** → **Authorize**.
-    *   Also go to **API Keys** → enter your **OMDb API Key**.
+> ⚠️ **How each step works:** When you click a tile, an **instruction dialog appears first** — read it carefully, then click **OK** and the relevant addon settings will open automatically. When you're done in settings, close them and click **"Yes"** when asked if you authorized successfully.
+
+1.  **Step 1 — TMDb Helper (Trakt + OMDb Key):**
+    *   Click the **Step 1** tile → read the instruction dialog → click **OK**.
+    *   TMDb Helper settings open automatically.
+    *   Go to **Trakt** → **Authorize** → enter the code at [trakt.tv/activate](https://trakt.tv/activate).
+    *   Go to **API Keys** → enter your **OMDb API Key**. (if you generated)
     *   Close settings → click **Yes** when asked if you authorized.
 
 2.  **Step 2 — Subtitles (Optional):**
-    *   Click the Step 2 item → read the instructions → click **OK**.
-    *   a4kSubtitles settings open. Go to **Authentications** → enter your **OpenSubtitles** username and password.
-    *   Close settings → click **Yes** when done (or skip if you don't use subtitles).
+    *   Click the **Step 2** tile → read the instruction dialog → click **OK**.
+    *   a4kSubtitles settings open automatically.
+    *   Go to **Authentications** → enter your **OpenSubtitles** username and password.
+    *   Close settings → click **Yes** when done.
+    *   💡 *If you don't use subtitles, you can still click through this step — it will skip automatically if the addon isn't installed.*
 
-3.  **Step 3 — Fen Light:**
-    *   Click the Step 3 item → read the instructions carefully → click **OK**.
-    *   Fen Light settings will open. **If an internal setup wizard appears, press Backspace to dismiss it first.**
-    *   Then go to **Sources Accounts** → **Real Debrid** → **Authorize**.
-    *   Enter the code displayed at [real-debrid.com/device](https://real-debrid.com/device).
-    *   Also go to **Meta Accounts** → **Trakt** → **Authorize**.
-    *   Enter the code displayed at [trakt.tv/activate](https://trakt.tv/activate).
-    *   Close settings → click **Yes** when asked if you authorized.
+3.  **Step 3 — Fen Light (Trakt + Real-Debrid + OMDb):**
+    *   Click the **Step 3** tile → read the instruction dialog carefully → click **OK**.
+    *   Click Open Fen Light Settings. 
+    *   Go to **Accounts** → **Real Debrid** → **Authorize** → enter the code at [real-debrid.com/device](https://real-debrid.com/device).
+    *   Go to **Accounts** → **Trakt** → **Authorize** → enter the code at [trakt.tv/activate](https://trakt.tv/activate).
+    *   Close Fen Light settings completely → click **Yes** when asked if you authorized.
 
 4.  **Finish Setup:**
-    *   Click **">> Finish Setup <<"** to hide the checklist and return to your home screen.
+    *   Click the **>> Finish Setup <<** tile.
+    *   The setup panel will disappear and you'll be taken to your home screen.
 
 **Your build is now fully set up and ready to use!**
 

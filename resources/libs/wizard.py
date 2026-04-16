@@ -198,6 +198,12 @@ class Wizard:
                     # Set flag for next startup
                     CONFIG.set_setting('post_install_setup', 'true')
 
+                # Reset the setup checklist so it reappears on next boot.
+                # Without this, a reinstall on the same machine keeps the old
+                # 'setup_complete = true' value and startup.py re-hides the
+                # checklist panel before the user even sees it.
+                CONFIG.set_setting('setup_complete', 'false')
+
                 self.dialog.ok(CONFIG.ADDONTITLE, "[COLOR {0}]To save changes you now need to force close Kodi, Press OK to force close Kodi[/COLOR]".format(CONFIG.COLOR2))
                 tools.kill_kodi(over=True)
             else:
