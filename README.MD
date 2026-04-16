@@ -27,9 +27,8 @@
   - [Step 2: Enable Unknown Sources](#step-2-enable-unknown-sources)
   - [Step 3: Download the Wizard](#step-3-download-the-wizard)
   - [Step 4: Install the Wizard from Zip File](#step-4-install-the-wizard-from-zip-file)
-  - [Step 5: Install the Base Pack](#step-5-install-the-base-pack)
-  - [Step 6: Install the Layout Pack](#step-6-install-the-layout-pack)
-  - [Step 7: Authorize Your Accounts](#step-7-authorize-your-accounts)
+  - [Step 5: Install the Build](#step-5-install-the-build)
+  - [Step 6: Authorize Your Accounts](#step-6-authorize-your-accounts-setup-checklist)
 - [Setting up Addons](#setting-up-addons)
 - [How to Use](#how-to-use)
 - [Anime Configuration](#anime-configuration)
@@ -150,54 +149,47 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 
 > ⚠️ **IMPORTANT:** Ensure you **do not have a VPN active** during the installation process as it can interfere with the downloads.
 
-### Step 5: Install the Base Pack
-
-The Base Pack installs all the core addons and settings. **You must install this first.**
+### Step 5: Install the Build
 
 1.  After the wizard is installed, **restart Kodi** — close it completely and reopen it.
-2.  The wizard will launch automatically. **Ignore the first popup and click continue: Do not select any settings for first install** — just click **Continue** and then click **Build Menu**.
-    *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard** manually.
-3.  Select **"Base Pack"** from the list.
-4.  Click **"(KieranWizard) Install"**.
-5.  A progress bar will appear — wait for the download and extraction to complete.
+2.  A popup will appear automatically saying **"Build Menu"** — click it to open the build menu.
+    *   If it doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard** manually.
+3.  A first-time settings screen appears. **Do not change any settings** — just click **Continue**.
+4.  You are now in the **Build Menu** — a tile-based screen with options including **Current Build**, **Build Information**, and **Save Data Menu**.
+5.  Click the teal **`(KieranWizard) Install`** tile.
+6.  A progress bar will appear — wait for the download and extraction to complete.
     *   💡 **Note:** If you see any errors during this part, **ignore them** — it should be fine.
-6.  When prompted, click **OK** to **force close Kodi**.
+7.  When prompted, click **OK** to **force close Kodi**.
+8.  **Reopen Kodi** and wait for it to fully load. Your build is installed.
 
-### Step 6: Install the Layout Pack
+### Step 6: Authorize Your Accounts (Setup Checklist)
 
-The Layout Pack applies the custom skin, menu layout, and widgets. Install this **after** the Base Pack.
+After reopening Kodi, you will see a setup checklist on the home screen. Work through each step in order.
 
-1.  **Reopen Kodi** and wait for it to fully load. 
-2.  Find the **KieranWizard** row on the home screen.
-3.  Navigate over to the **third option** to install the Layout pack.
-4.  Select **`[21.0] Layout Pack (v1.0)`** and then click **"(KieranWizard) Install"**.
-5.  When prompted for a passcode, enter the trial passcode: **`KIERAN2026`**.
-6.  Wait for the installation to finish and **force close Kodi** again when prompted.
+> ⚠️ **For each step, an instruction dialog will appear first** — read it carefully, then click **OK** to open the addon settings. When you're done in settings, close them and answer **"Yes"** when asked if you authorized successfully.
 
-### Step 7: Authorize Your Accounts (Setup Checklist)
+1.  **Step 1 — TMDb Helper:**
+    *   Click the Step 1 item → read the instructions → click **OK**.
+    *   TMDb Helper settings open. Go to **Accounts** → **Trakt** → **Authorize**.
+    *   Also go to **API Keys** → enter your **OMDb API Key**.
+    *   Close settings → click **Yes** when asked if you authorized.
 
-After installing the layout pack and reopening Kodi, you will see a setup screen with several options: **Keep Debrid, Keep Trakt, Keep Trakt, Open Wizard, Settings**.
+2.  **Step 2 — Subtitles (Optional):**
+    *   Click the Step 2 item → read the instructions → click **OK**.
+    *   a4kSubtitles settings open. Go to **Authentications** → enter your **OpenSubtitles** username and password.
+    *   Close settings → click **Yes** when done (or skip if you don't use subtitles).
 
-1.  **Authorize Fen Light:**
-    *   Open the first option: **Keep Debrid**.
-    *   Click the **Play button**.
-    *   Select **Open Fen Light Settings...** -> **Sources Accounts** -> **Real Debrid Authorize**.
+3.  **Step 3 — Fen Light:**
+    *   Click the Step 3 item → read the instructions carefully → click **OK**.
+    *   Fen Light settings will open. **If an internal setup wizard appears, press Backspace to dismiss it first.**
+    *   Then go to **Sources Accounts** → **Real Debrid** → **Authorize**.
     *   Enter the code displayed at [real-debrid.com/device](https://real-debrid.com/device).
-    *   Go to **Meta Accounts** -> **Trakt** -> **Authorize**.
+    *   Also go to **Meta Accounts** → **Trakt** → **Authorize**.
     *   Enter the code displayed at [trakt.tv/activate](https://trakt.tv/activate).
-    *   *Tip: You can now keep hitting the **Backspace** or **Escape** key to return to the home setup screen.*
+    *   Close settings → click **Yes** when asked if you authorized.
 
-2. **Authorize TMDb Helper:**
-    *   Open the third option: **Keep Trakt**.
-    *   Click the **Play button**.
-    *   Select **Open TheMovieDb Helper Settings...** -> **Accounts** -> **Trakt** -> **Authorize**.
-    *   Enter the code displayed at [trakt.tv/activate](https://trakt.tv/activate).
-    *   *Tip: You can now keep hitting the **Backspace** or **Escape** key to return to the home setup screen.*
-
-3.  **Finalize Setup:**
-    *   After authorizing your accounts, select the **Settings** option.
-    *   Click the **Play button**.
-    *   **Reload Kodi** (restart the app).
+4.  **Finish Setup:**
+    *   Click **">> Finish Setup <<"** to hide the checklist and return to your home screen.
 
 **Your build is now fully set up and ready to use!**
 

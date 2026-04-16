@@ -30,46 +30,82 @@ class Accounts:
         """Check if an addon is installed by verifying its directory exists."""
         return os.path.exists(os.path.join(CONFIG.ADDONS, addon_id))
 
+    def _any_auth_window_active(self):
+        """Return True if any auth-related window is currently visible."""
+        return (
+            xbmc.getCondVisibility('Window.IsVisible(addonsettings)') or
+            xbmc.getCondVisibility('Window.IsVisible(yesnodialog)') or
+            xbmc.getCondVisibility('Window.IsVisible(okdialog)') or
+            xbmc.getCondVisibility('Window.IsVisible(progressdialog)') or
+            xbmc.getCondVisibility('Window.IsVisible(virtualkeyboard)')
+        )
+
     def _wait_for_window_close(self):
         """
         Wait for any auth-related windows (addon settings, dialogs, etc.) to close.
         First waits up to 10 seconds for an auth window to appear, then waits
         for the user to close it.
         """
-        # 1. Wait dynamically up to 10 seconds for an auth window to appear
+        # 1. Wait up to 10 seconds for a window to appear
         window_appeared = False
         for _ in range(20):  # 20 * 500ms = 10 seconds
-            any_window_active = (
-                xbmc.getCondVisibility('Window.IsVisible(addonsettings)') or
-                xbmc.getCondVisibility('Window.IsVisible(yesnodialog)') or
-                xbmc.getCondVisibility('Window.IsVisible(okdialog)') or
-                xbmc.getCondVisibility('Window.IsVisible(progressdialog)') or
-                xbmc.getCondVisibility('Window.IsVisible(virtualkeyboard)')
-            )
-            if any_window_active:
+            if self._any_auth_window_active():
                 window_appeared = True
                 break
             xbmc.sleep(500)
-            
+
         if not window_appeared:
-            # If no window spawned after 10 full seconds, proceed anyway
             return
 
-        # 2. Once a window has appeared, wait for it (up to 10 mins) to close
-        max_checks = 1200  # 10 minutes
-        for _ in range(max_checks):
-            any_window_active = (
-                xbmc.getCondVisibility('Window.IsVisible(addonsettings)') or
-                xbmc.getCondVisibility('Window.IsVisible(yesnodialog)') or
-                xbmc.getCondVisibility('Window.IsVisible(okdialog)') or
-                xbmc.getCondVisibility('Window.IsVisible(progressdialog)') or
-                xbmc.getCondVisibility('Window.IsVisible(virtualkeyboard)')
-            )
-            if not any_window_active:
+        # 2. Wait for the window to close (up to 10 minutes)
+        for _ in range(1200):
+            if not self._any_auth_window_active():
                 break
             xbmc.sleep(500)
 
         # Brief settle time for the UI backing out
+        xbmc.sleep(500)
+
+    def _wait_for_window_close_debounced(self, settle_seconds=2):
+        """
+        Like _wait_for_window_close but with a debounce period.
+
+        The window must stay CLOSED for `settle_seconds` consecutive seconds
+        before this method returns. This prevents false positives caused by
+        addons (like Fen Light) that briefly close and reopen their settings
+        window internally when dismissing a first-run wizard.
+
+        Use this instead of _wait_for_window_close for addons that are known
+        to have internal popups that temporarily close the settings window.
+        """
+        # 1. Wait up to 10 seconds for a window to appear
+        window_appeared = False
+        for _ in range(20):  # 20 * 500ms = 10 seconds
+            if self._any_auth_window_active():
+                window_appeared = True
+                break
+            xbmc.sleep(500)
+
+        if not window_appeared:
+            return
+
+        # 2. Wait for the window to close, requiring it to stay closed for
+        #    `settle_seconds` before we consider the user truly done.
+        required_ticks = settle_seconds * 2  # 500ms per tick
+        consecutive_closed = 0
+
+        for _ in range(1200):  # up to 10 minutes
+            if self._any_auth_window_active():
+                # Window is still open (or reopened) — reset the counter
+                consecutive_closed = 0
+            else:
+                consecutive_closed += 1
+                if consecutive_closed >= required_ticks:
+                    # Window has been closed for the full settle period
+                    break
+            xbmc.sleep(500)
+
+        # Final settle time for the UI to finish animating out
         xbmc.sleep(500)
 
     def _run_auth(self, auth_command, addon_id, service_name):
@@ -211,9 +247,18 @@ class Accounts:
 
     def checklist_tmdb_settings(self):
         """Homescreen checklist: Open TMDb Helper settings (Step 1)."""
-        launched = self.open_tmdb_settings()
-        if launched:
-            self._confirm_and_set_bool('TMDb Helper (Trakt + OMDb key)', SKIN_BOOL_TRAKT_TMDB)
+        # Show instructions first, then open settings — this avoids window-detection
+        # race conditions where a key press during transition triggers a false confirm.
+        self.dialog.ok(
+            CONFIG.ADDONTITLE,
+            "[COLOR {0}][B]Step 1: TMDb Helper[/B][/COLOR][CR][CR]"
+            "[COLOR {1}]Settings will open now.[CR][CR]"
+            "Go to: [B]Accounts[/B] → [B]Trakt[/B] → [B]Authorize[/B][CR]"
+            "Then go to: [B]API Keys[/B] → Enter your [B]OMDb API Key[/B][CR][CR]"
+            "Press OK, authorize in settings, then close settings to continue.[/COLOR]".format(
+                CONFIG.COLOR1, CONFIG.COLOR2))
+        self.open_tmdb_settings()
+        self._confirm_and_set_bool('TMDb Helper (Trakt + OMDb key)', SKIN_BOOL_TRAKT_TMDB)
 
     def checklist_subtitles(self):
         """Homescreen checklist: Open a4kSubtitles settings (Step 2 — optional)."""
@@ -226,18 +271,67 @@ class Accounts:
                 "Skipping this step.[/COLOR]".format(CONFIG.COLOR1, CONFIG.COLOR2))
             xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_SUBTITLES))
             return
-        launched = self.open_subtitles_settings()
-        if launched:
-            self._confirm_and_set_bool('Subtitles (a4kSubtitles)', SKIN_BOOL_SUBTITLES)
+        self.dialog.ok(
+            CONFIG.ADDONTITLE,
+            "[COLOR {0}][B]Step 2: Subtitles (Optional)[/B][/COLOR][CR][CR]"
+            "[COLOR {1}]Settings will open now.[CR][CR]"
+            "Go to: [B]Authentications[/B] → Enter your [B]OpenSubtitles[/B] username and password.[CR][CR]"
+            "Press OK, configure in settings, then close settings to continue.[/COLOR]".format(
+                CONFIG.COLOR1, CONFIG.COLOR2))
+        self.open_subtitles_settings()
+        self._confirm_and_set_bool('Subtitles (a4kSubtitles)', SKIN_BOOL_SUBTITLES)
 
     def checklist_fenlight_settings(self):
-        """Homescreen checklist: Open Fen Light settings (Step 3)."""
-        launched = self.open_fenlight_settings()
-        if launched:
-            # Fen Light covers both RD and Trakt — confirm once and mark both bools
-            success = self._confirm_and_set_bool('Fen Light (Trakt + Real-Debrid + OMDb)', SKIN_BOOL_RD)
-            if success:
-                xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
+        """
+        Homescreen checklist: Open Fen Light settings (Step 3).
+
+        IMPORTANT: Fen Light runs an internal first-run wizard when its settings
+        open for the first time. This wizard creates its own dialog on top of the
+        addonsettings window. When the user presses Backspace to dismiss it, the
+        entire addonsettings window closes prematurely — which would trip
+        _wait_for_window_close and fire the confirm dialog before the user is ready.
+
+        Fix: Show an instruction dialog first (so the user reads the steps and
+        dismisses the Backspace in a controlled way), THEN open settings. The
+        confirm dialog only fires after the user manually closes Fen Light settings.
+        """
+        # Step 1: Show instructions so the user knows what to do before settings open.
+        # This also acts as a "barrier" so any Backspace press here is absorbed by
+        # the OK dialog rather than leaking into the confirm dialog.
+        self.dialog.ok(
+            CONFIG.ADDONTITLE,
+            "[COLOR {0}][B]Step 3: Fen Light[/B][/COLOR][CR][CR]"
+            "[COLOR {1}]Settings will open now. If a setup wizard appears inside,[CR]"
+            "press [B]Backspace[/B] to dismiss it first, [B]then[/B] authorize:[CR][CR]"
+            "• Go to [B]Sources Accounts[/B] → [B]Real Debrid[/B] → [B]Authorize[/B][CR]"
+            "• Go to [B]Meta Accounts[/B] → [B]Trakt[/B] → [B]Authorize[/B][CR][CR]"
+            "Press OK when ready, complete authorization in settings, then[CR]"
+            "close settings to return here.[/COLOR]".format(CONFIG.COLOR1, CONFIG.COLOR2))
+
+        # Step 2: Check the addon is installed, then open Fen Light settings.
+        # We launch directly (not via _run_auth) so we can use the debounced
+        # wait — this prevents Fen Light's internal wizard from tripping the
+        # confirm dialog prematurely when the user presses Backspace inside it.
+        if not self._addon_installed('plugin.video.fenlight'):
+            self.dialog.ok(CONFIG.ADDONTITLE,
+                "[COLOR red]Addon Not Installed[/COLOR][CR][CR]"
+                "[COLOR {0}]Fen Light is not installed.[CR]"
+                "Please install it first.[/COLOR]".format(CONFIG.COLOR2))
+            return
+
+        logging.log("[Post Install Setup] Launching: Fen Light settings (debounced)")
+        xbmc.executebuiltin('Addon.OpenSettings(plugin.video.fenlight)')
+
+        # Use the debounced wait — requires the settings window to stay closed
+        # for 2 full seconds before we consider the user done. Handles the case
+        # where Fen Light briefly closes then reopens its window internally.
+        self._wait_for_window_close_debounced(settle_seconds=2)
+        logging.log("[Post Install Setup] Returned from: Fen Light settings (debounced)")
+
+        # Step 3: Confirm and mark both bools (Fen Light covers RD + Trakt).
+        success = self._confirm_and_set_bool('Fen Light (Trakt + Real-Debrid)', SKIN_BOOL_RD)
+        if success:
+            xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
 
     def checklist_finish(self):
         """
