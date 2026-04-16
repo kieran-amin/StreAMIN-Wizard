@@ -155,7 +155,7 @@ Kodi blocks third-party add-on installations by default. You must enable "Unknow
 The Base Pack installs all the core addons and settings. **You must install this first.**
 
 1.  After the wizard is installed, **restart Kodi** — close it completely and reopen it.
-2.  The wizard will launch automatically. **Do not select any settings for first install** — just click **Continue** and then click **Build Menu**.
+2.  The wizard will launch automatically. **Ignore the first popup and click continue: Do not select any settings for first install** — just click **Continue** and then click **Build Menu**.
     *   If the prompt doesn't appear, go to **Add-ons** → **Program add-ons** → **KieranWizard** manually.
 3.  Select **"Base Pack"** from the list.
 4.  Click **"(KieranWizard) Install"**.
