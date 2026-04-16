@@ -361,13 +361,15 @@ if CONFIG.get_setting('setup_complete') == 'true':
     logging.log("[Checklist] Re-applying SetupComplete skin bools after restart", level=xbmc.LOGINFO)
     from resources.libs.accounts import (
         SKIN_BOOL_RD, SKIN_BOOL_TRAKT_FENLIGHT,
-        SKIN_BOOL_TRAKT_TMDB, SKIN_BOOL_SETUP_COMPLETE,
+        SKIN_BOOL_TRAKT_TMDB, SKIN_BOOL_SUBTITLES,
+        SKIN_BOOL_SETUP_COMPLETE,
     )
     xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_SETUP_COMPLETE))
-    # Also restore the individual auth bools so checkmarks remain visible
+    # Also restore the individual step bools so checkmarks remain visible
+    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_TMDB))
+    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_SUBTITLES))
     xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_RD))
     xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
-    xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_TMDB))
 else:
     logging.log("[Checklist] Setup not yet complete, skipping skin bool restore", level=xbmc.LOGINFO)
 
