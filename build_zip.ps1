@@ -15,10 +15,12 @@ $Exclude = @(
     ".gitignore",
     "__pycache__",
     "build_zip.ps1",
+    "build_zip.py",
+    "BETA_TEST_PLAN.md",
+    "DEPLOYMENT_CHECKLIST.MD",
     $ZipName,
     "README.MD",
     "INSTRUCTIONS.md",
-    "DEPLOYMENT_CHECKLIST.MD",
     "LICENSE"
 )
 

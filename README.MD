@@ -16,7 +16,7 @@
 
 ## Step 1 — Install the Wizard
 
-1. **Download** `plugin.program.kieranwizard.zip` (provided by Kieran).
+1. **Download** [`plugin.program.kieranwizard.zip`](https://github.com/kieran-amin/StreAMIN-Wizard/releases/latest) from the GitHub releases page.
 2. In Kodi, go to **Settings → Add-ons → Install from zip file**.
 3. Navigate to where you saved the ZIP and select it.
 4. Wait for the *"Add-on installed"* notification.
@@ -28,7 +28,7 @@
 
 1. Go to **Add-ons → Program Add-ons → KieranWizard**.
 2. Select **Builds** from the wizard menu.
-3. Choose **StreAMIN** and select **Fresh Install**.
+3. Choose **StreAMIN Beta** and select **Fresh Install**.
 4. When prompted to save data, choose as appropriate and confirm.
 5. Kodi will restart automatically with the new skin applied.
 
@@ -106,8 +106,8 @@ The setup screen will hide and your home screen will return to the KStreams page
 **Setup checklist reappears after restart?**  
 The checklist hides based on a skin bool that is re-applied on every Kodi startup. If it keeps showing, open the wizard → go to the Setup Checklist → click **Finish Setup** again.
 
-**Build prompt appears every time?**
-This means the build URL in `builds.txt` is not reachable. Contact Kieran — the file hosting link may need updating.
+**Build prompt appears every time?**  
+This means the wizard can't reach the build server. Check your internet connection, or contact Kieran — the server link may need updating.
 
 **Can't find a stream / Real-Debrid not working?**
 Make sure Real-Debrid is authorized in Fen Light (Step 3 above). You can re-open Fen Light settings at any time via **Add-ons → Video Add-ons → Fen Light**.
