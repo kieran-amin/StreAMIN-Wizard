@@ -11,11 +11,13 @@ from resources.libs.common import tools
 from resources.libs.common.config import CONFIG
 
 # Skin bool names used for the homescreen checklist page.
-# These persist in the skin's settings and survive Kodi restarts.
-SKIN_BOOL_RD = 'Setup_RD_Authorized'
-SKIN_BOOL_TRAKT_FENLIGHT = 'Setup_Trakt_FenLight_Authorized'
-SKIN_BOOL_TRAKT_TMDB = 'Setup_Trakt_TMDb_Authorized'
-SKIN_BOOL_SETUP_COMPLETE = 'SetupComplete'
+# IMPORTANT: These names must exactly match the skin setting IDs shipped in the
+# Layout Pack (case-sensitive). The Layout Pack uses lowercase IDs.
+SKIN_BOOL_TRAKT_TMDB = 'setup_trakt_tmdb_authorized'      # Step 1: TMDb Helper
+SKIN_BOOL_SUBTITLES  = 'setup_subtitles_configured'       # Step 2: Subtitles (a4kSubtitles)
+SKIN_BOOL_RD = 'setup_rd_authorized'                      # Step 3: Fen Light (Real-Debrid)
+SKIN_BOOL_TRAKT_FENLIGHT = 'setup_trakt_fenlight_authorized'  # Step 3: Fen Light (Trakt)
+SKIN_BOOL_SETUP_COMPLETE = 'setupcomplete'
 
 
 class Accounts:
@@ -90,7 +92,12 @@ class Accounts:
         return True
 
     # ==========================================================================
-    #  Core auth actions (used by both popup loop and homescreen checklist)
+    #  Homescreen checklist item comments:
+    #
+    #  Checklist order:
+    #    Step 1 — TMDb Helper   (Trakt + OMDb key)
+    #    Step 2 — Subtitles     (a4kSubtitles — optional)
+    #    Step 3 — Fen Light     (Trakt + Real-Debrid + OMDb key)
     # ==========================================================================
 
     def fenlight_rd(self):
@@ -115,6 +122,30 @@ class Accounts:
             'RunScript(plugin.video.themoviedb.helper, authenticate_trakt)',
             'plugin.video.themoviedb.helper',
             'Trakt (TMDbHelper)'
+        )
+
+    def open_tmdb_settings(self):
+        """Open TMDb Helper settings so the user can set Trakt + OMDb keys."""
+        return self._run_auth(
+            'Addon.OpenSettings(plugin.video.themoviedb.helper)',
+            'plugin.video.themoviedb.helper',
+            'TMDb Helper Settings'
+        )
+
+    def open_subtitles_settings(self):
+        """Open a4kSubtitles settings so the user can configure subtitles."""
+        return self._run_auth(
+            'Addon.OpenSettings(service.subtitles.a4ksubtitles)',
+            'service.subtitles.a4ksubtitles',
+            'a4kSubtitles Settings'
+        )
+
+    def open_fenlight_settings(self):
+        """Open Fen Light settings so the user can set Trakt, RD, and OMDb keys."""
+        return self._run_auth(
+            'Addon.OpenSettings(plugin.video.fenlight)',
+            'plugin.video.fenlight',
+            'Fen Light Settings'
         )
 
     # ==========================================================================
@@ -178,27 +209,60 @@ class Accounts:
         if launched:
             self._confirm_and_set_bool('Trakt (TMDb)', SKIN_BOOL_TRAKT_TMDB)
 
+    def checklist_tmdb_settings(self):
+        """Homescreen checklist: Open TMDb Helper settings (Step 1)."""
+        launched = self.open_tmdb_settings()
+        if launched:
+            self._confirm_and_set_bool('TMDb Helper (Trakt + OMDb key)', SKIN_BOOL_TRAKT_TMDB)
+
+    def checklist_subtitles(self):
+        """Homescreen checklist: Open a4kSubtitles settings (Step 2 — optional)."""
+        if not self._addon_installed('service.subtitles.a4ksubtitles'):
+            # Subtitles addon not installed — skip gracefully and mark done
+            self.dialog.ok(
+                CONFIG.ADDONTITLE,
+                "[COLOR {0}]Subtitles addon not found.[CR][CR]"
+                "[COLOR {1}]a4kSubtitles is not installed in this build.[CR]"
+                "Skipping this step.[/COLOR]".format(CONFIG.COLOR1, CONFIG.COLOR2))
+            xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_SUBTITLES))
+            return
+        launched = self.open_subtitles_settings()
+        if launched:
+            self._confirm_and_set_bool('Subtitles (a4kSubtitles)', SKIN_BOOL_SUBTITLES)
+
+    def checklist_fenlight_settings(self):
+        """Homescreen checklist: Open Fen Light settings (Step 3)."""
+        launched = self.open_fenlight_settings()
+        if launched:
+            # Fen Light covers both RD and Trakt — confirm once and mark both bools
+            success = self._confirm_and_set_bool('Fen Light (Trakt + Real-Debrid + OMDb)', SKIN_BOOL_RD)
+            if success:
+                xbmc.executebuiltin('Skin.SetBool({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
+
     def checklist_finish(self):
         """
         Mark setup as complete. Sets Skin.Bool(SetupComplete) which the skin
         uses to hide the Setup page from the homescreen.
 
-        IMPORTANT: Skin.SetBool is session-only and does not survive a Kodi
-        restart. We therefore also persist the flag to the wizard's addon
-        settings (setup_complete = 'true') so that startup.py can re-apply
-        the skin bool on every subsequent boot.
+        We use ReloadSkin() instead of RestartApp() so that:
+          1. The setup panel hides immediately without a full Kodi restart.
+          2. The skin lands on whatever its default first-visible home panel is
+             (KStreams), rather than the now-gone setup panel.
+
+        Skin.SetBool is session-only; startup.py re-applies all bools on
+        every boot using the persisted 'setup_complete' addon setting.
         """
-        # Check if all items have been marked as authorized
+        # Check if all items have been marked as complete
         all_done = (
-            xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_RD)) and
-            xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_TRAKT_FENLIGHT)) and
-            xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_TRAKT_TMDB))
+            xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_TRAKT_TMDB)) and
+            xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_SUBTITLES)) and
+            xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_RD))
         )
 
         if not all_done:
             proceed = self.dialog.yesno(
                 CONFIG.ADDONTITLE,
-                "[COLOR {0}]Not all services have been authorized yet.[CR][CR]"
+                "[COLOR {0}]Not all steps have been completed yet.[CR][CR]"
                 "Are you sure you want to finish setup?[/COLOR]".format(CONFIG.COLOR2),
                 yeslabel='[B]Yes, Finish Anyway[/B]',
                 nolabel='[B]Go Back[/B]')
@@ -217,15 +281,13 @@ class Accounts:
         self.dialog.ok(
             CONFIG.ADDONTITLE,
             "[COLOR {0}][B]Setup Complete![/B][/COLOR][CR][CR]"
-            "[COLOR {1}]The Setup screen has been disabled.[CR]"
-            "Kodi will now restart to apply changes.[/COLOR]".format(
+            "[COLOR {1}]The Setup screen is now hidden.[CR]"
+            "Returning to your home screen — navigate to KStreams.[/COLOR]".format(
                 CONFIG.COLOR1, CONFIG.COLOR2))
 
-        # Restart Kodi so the Setup screen disappears and all changes apply.
-        # sys.exit() immediately releases the plugin thread — without it, Kodi
-        # deadlocks waiting for this RunPlugin to finish before it can restart.
-        xbmc.executebuiltin('RestartApp()')
-        sys.exit()
+        # Reload the skin in-place so the setup panel hides immediately.
+        # This avoids a full Kodi restart which would land on the wrong home panel.
+        xbmc.executebuiltin('ReloadSkin()')
 
     def checklist_reset(self):
         """
@@ -235,9 +297,10 @@ class Accounts:
         re-applies SetupComplete on boot.
         Useful for re-running setup or after a layout pack update.
         """
+        xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_TRAKT_TMDB))
+        xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_SUBTITLES))
         xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_RD))
         xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
-        xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_TRAKT_TMDB))
         xbmc.executebuiltin('Skin.Reset({})'.format(SKIN_BOOL_SETUP_COMPLETE))
 
         # Also clear the persistent flag so the skin bool isn't re-applied on next boot
@@ -260,47 +323,54 @@ class Accounts:
     def get_checklist_listing(self):
         """
         Return a Kodi directory listing for the homescreen widget.
-        Each item is clickable and triggers the corresponding auth flow.
+        Each item is clickable and opens the relevant addon's settings.
         Shows ✓/✗ status based on Skin.Bool values.
+
+        Order:
+          1. TMDb Helper  — set Trakt + OMDb API key
+          2. Subtitles    — configure a4kSubtitles (optional)
+          3. Fen Light    — set Trakt, Real-Debrid, and OMDb key
         """
         logging.log("[Checklist Widget] Generating checklist listing", level=xbmc.LOGINFO)
         from resources.libs.common import directory
 
         # Check completion status via skin bools
-        rd_done = xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_RD))
-        trakt_fl_done = xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_TRAKT_FENLIGHT))
-        trakt_tmdb_done = xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_TRAKT_TMDB))
+        tmdb_done     = xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_TRAKT_TMDB))
+        subs_done     = xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_SUBTITLES))
+        fenlight_done = xbmc.getCondVisibility('Skin.HasSetting({})'.format(SKIN_BOOL_RD))
 
         # Status indicators
-        done = '[COLOR limegreen]\u2713[/COLOR]'    # ✓
-        todo = '[COLOR red]\u2717[/COLOR]'           # ✗
+        done = '[COLOR limegreen]\u2713[/COLOR]'  # ✓
+        todo = '[COLOR red]\u2717[/COLOR]'         # ✗
 
-        # Auth items with status
+        # Step 1: TMDb Helper
         directory.add_file(
-            '{0}  Authorize Real-Debrid'.format(done if rd_done else todo),
-            {'mode': 'accounts', 'action': 'checklist_fenlight_rd'},
+            '{0}  [B]Step 1:[/B] TMDb Helper — Trakt + OMDb Key'.format(done if tmdb_done else todo),
+            {'mode': 'accounts', 'action': 'checklist_tmdb_settings'},
+            icon=CONFIG.ICONTRAKT,
+            description='Open TMDb Helper settings to enter your Trakt and OMDb API keys. See README for exact steps.')
+
+        # Step 2: Subtitles
+        directory.add_file(
+            '{0}  [B]Step 2:[/B] Subtitles (Optional)'.format(done if subs_done else todo),
+            {'mode': 'accounts', 'action': 'checklist_subtitles'},
+            icon=CONFIG.ICONSETTINGS,
+            description='Open a4kSubtitles settings to configure subtitle providers. Optional — skip if not needed.')
+
+        # Step 3: Fen Light
+        directory.add_file(
+            '{0}  [B]Step 3:[/B] Fen Light — Trakt + Real-Debrid + OMDb'.format(done if fenlight_done else todo),
+            {'mode': 'accounts', 'action': 'checklist_fenlight_settings'},
             icon=CONFIG.ICONDEBRID,
-            description='Open Fen Light settings to authorize your Real-Debrid account.')
-
-        directory.add_file(
-            '{0}  Authorize Trakt (Fen Light)'.format(done if trakt_fl_done else todo),
-            {'mode': 'accounts', 'action': 'checklist_fenlight_trakt'},
-            icon=CONFIG.ICONTRAKT,
-            description='Open Fen Light settings to authorize your Trakt account.')
-
-        directory.add_file(
-            '{0}  Authorize Trakt (TMDb)'.format(done if trakt_tmdb_done else todo),
-            {'mode': 'accounts', 'action': 'checklist_tmdb_trakt'},
-            icon=CONFIG.ICONTRAKT,
-            description='Authorize Trakt directly in TMDb Helper.')
+            description='Open Fen Light settings to authorize Trakt, Real-Debrid, and OMDb. See README for exact steps.')
 
         directory.add_separator()
 
         directory.add_file(
-            '[B][COLOR gold]>> Finish Setup & Restart <<[/COLOR][/B]',
+            '[B][COLOR gold]>> Finish Setup <<[/COLOR][/B]',
             {'mode': 'accounts', 'action': 'checklist_finish'},
             icon=CONFIG.ICONSETTINGS,
-            description='Disable this setup screen and restart Kodi.')
+            description='Hide this setup screen and return to your home screen.')
 
         logging.log("[Checklist Widget] Listing successfully generated", level=xbmc.LOGINFO)
 
@@ -313,14 +383,16 @@ class Accounts:
         Show a persistent setup menu as a popup. After each auth attempt,
         the menu reappears with a checkmark on completed items. The menu
         only closes when the user selects 'Done' or presses Back.
+
+        Order matches the homescreen checklist: TMDb → Subtitles → Fen Light.
         """
         logging.log("[Post Install Setup] Starting post-install loop", level=xbmc.LOGINFO)
         self.completed = set()
 
         labels = [
-            'Authorize Real-Debrid (Fen Light)',
-            'Authorize Trakt (Fen Light)',
-            'Authorize Trakt (TMDbHelper)',
+            'Configure TMDb Helper (Trakt + OMDb)',
+            'Configure Subtitles (a4kSubtitles — optional)',
+            'Configure Fen Light (Trakt + Real-Debrid + OMDb)',
         ]
 
         while True:
@@ -337,13 +409,13 @@ class Accounts:
                 CONFIG.ADDONTITLE + '  -  Post Install Setup', options)
 
             if ret == 0:
-                self.fenlight_rd()
+                self.open_tmdb_settings()
                 self.completed.add(0)
             elif ret == 1:
-                self.fenlight_trakt()
+                self.open_subtitles_settings()
                 self.completed.add(1)
             elif ret == 2:
-                self.tmdb_trakt()
+                self.open_fenlight_settings()
                 self.completed.add(2)
             elif ret == 3 or ret == -1:
                 break

@@ -16,7 +16,8 @@ ART = os.path.join(PATH, 'resources', 'media')
 ADDONTITLE = '[COLOR darkgreen][B]Kieran[/B][/COLOR]Wizard'
 BUILDERNAME = 'KieranWizard'
 EXCLUDES = [ADDON_ID, 'repository.kieranwizard', 'xbmc.addon', 'xbmc.gui']
-# Text File with build info in it. Please read https://github.com/a4k-openproject/plugin.program.openwizard/wiki/Installing-Builds
+# Text file with build info for the beta single-build flow.
+# TODO: Replace REPLACE_OWNER/REPLACE_REPO if this repository path changes.
 BUILDFILE = 'https://raw.githubusercontent.com/kieran-amin/StreAMIN-Wizard/main/builds.txt'
 # How often you would like it to check for build updates in days
 # 0 being every startup of kodi
@@ -97,10 +98,11 @@ AUTOUPDATE = 'Yes'
 AUTOINSTALL = 'No'
 # Addon ID for the repository
 REPOID = 'repository.kieranwizard'
-# Url to Addons.xml file in your repo folder(this is so we can get the latest version)
-REPOADDONXML = 'https://'
-# Url to folder zip is located in
-REPOZIPURL = 'https://'
+# Optional repo auto-update URLs. Leave as placeholders for beta unless enabling repository updates.
+# TODO: Set to your repository addons.xml URL when ready, or keep placeholder to disable.
+REPOADDONXML = 'https://REPLACE_WITH_REPO_ADDONXML_URL'
+# TODO: Set to your repository ZIP folder URL when ready, or keep placeholder to disable.
+REPOZIPURL = 'https://REPLACE_WITH_REPO_ZIP_FOLDER_URL'
 #########################################################
 
 #########################################################

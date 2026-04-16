@@ -205,6 +205,16 @@ class Router:
             elif action == 'tmdb_trakt':
                 acc.tmdb_trakt()
             # Homescreen checklist actions (called via RunPlugin from skin shortcuts)
+            # Step 1: TMDb Helper settings
+            elif action == 'checklist_tmdb_settings':
+                acc.checklist_tmdb_settings()
+            # Step 2: Subtitles settings
+            elif action == 'checklist_subtitles':
+                acc.checklist_subtitles()
+            # Step 3: Fen Light settings
+            elif action == 'checklist_fenlight_settings':
+                acc.checklist_fenlight_settings()
+            # Legacy individual auth actions (kept for backwards compatibility)
             elif action == 'checklist_fenlight_rd':
                 acc.checklist_fenlight_rd()
             elif action == 'checklist_fenlight_trakt':
